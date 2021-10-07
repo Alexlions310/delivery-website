@@ -1,0 +1,1359 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Курьер-office</title>
+  <script src="https://kit.fontawesome.com/cdb16a4fd9.js" crossorigin="anonymous"></script>
+  <!-- Get fontawesome Kit-code -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link rel="shortcut icon" href="IMG/favicons.png">
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/pricing/">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+
+      .btn-outline-primary {
+        margin-right: 10px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .btn-outline-primary {
+        margin-top: 10px;
+      }
+
+      .ecommerce-stuff {
+        background-position: right 20px;
+        background-size: 270px;
+        margin: 0 12px;
+        padding-top: 240px;
+        padding-left: 16px;
+      }
+
+      .layout__content-header {
+        padding-bottom: 0;
+        font-size: 22px !important;
+      }
+
+      .dv-index-info__text {
+        font-size: 14px;
+        line-height: 1.57;
+      }
+
+      .about-text p {
+        font-size: 14px;
+        line-height: 22px;
+      }
+
+      .about-text {
+        columns: 1 !important;
+        text-align: start;
+        padding: 20px;
+        margin: 0 auto;
+        max-width: 470px !important;
+      }
+
+      .text-head {
+        font-size: 26px !important;
+        padding-bottom: 10px;
+        text-align: center;
+      }
+
+      .head-text {
+        padding-bottom: 24px;
+        text-align: center;
+        font-size: 14px;
+        line-height: 1.71;
+      }
+
+      .pls-install-app__header {
+        max-width: initial;
+        margin-bottom: 30px;
+        flex-basis: inherit;
+      }
+
+      .pls-install-app__qr-code {
+        margin-right: 0 !important;
+      }
+
+      .pls-install-app__header {
+        font-size: 26px !important;
+        max-width: 100% !important;
+        text-align: center;
+      }
+
+      .pls-install-app__description {
+        text-align: center;
+      }
+
+      .ecommerce-stuff__list-item {
+        width: 100%;
+      }
+
+      .pls-install-app__links {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .pls-install-app__qr-code {
+        margin-right: 0;
+      }
+
+      .pls-install-app__apps {
+        margin-top: 30px;
+      }
+
+      .layout__content-header {
+        padding-bottom: 0;
+        font-size: 22px;
+      }
+
+      .dv-small-card-list__items {
+        padding-left: 0px;
+      }
+
+      .dv-small-card-list__item {
+        width: 100% !important;
+        padding-right: 0px;
+      }
+
+      .layout__content-wrapper--columns {
+        flex-direction: column;
+        align-items: center;
+        justify-content: normal;
+        display: flex;
+      }
+
+      .layout__column {
+        width: auto;
+      }
+
+      .payment__title {
+        margin: 0 0 8px;
+        line-height: 1.2;
+        font-size: 21px;
+      }
+
+      .payment__name {
+        max-width: 150px;
+        white-space: normal;
+        line-height: 1.2em;
+      }
+
+      .payment__list {
+        padding: 0 30px;
+      }
+
+      .payment__subtitle {
+        margin: 0 0 30px;
+        font-size: 14px;
+      }
+
+      .payment {
+        margin-bottom: 40px;
+      }
+    }
+
+    .ecommerce-stuff__list-item-header {
+      position: relative;
+      margin-bottom: 8px;
+      font-size: 20px;
+      line-height: 26px;
+      font-weight: bold;
+    }
+  </style>
+  <!-- Custom styles for this template -->
+  <link href="CSS3/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="CSS3/login.css">
+</head>
+
+<body>
+  <div class="d-flex flex-column flex-md-row align-items-center container p-3 px-md-4 bg-white">
+    <h5 class="my-0 font-weight-normal"><a href="#" class="nav-link font-weight-bold"
+        style="color: rgb(255, 62, 128);">Курьер-office</a></h5>
+    <svg width="12px" height="12px" viewBox="0 0 16 16" class="bi bi-geo-alt-fill" fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd"
+        d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+    </svg>
+    <a class="nav-link dropdown-toggle hover-class text-dark mr-md-auto p-0 ml-2" data-toggle="dropdown" href="#"
+      role="button" aria-haspopup="true" aria-expanded="false">
+      Ташкент</a>
+
+    <a id="redirectingOrder" class="btn btn-outline-primary" href="#" onclick="checkToken()">Заказать доставку
+    </a>
+    <!-- checking user has token or not  -->
+    <script>
+      function checkToken() {
+        let token = window.localStorage.getItem('token');
+        if (token !== null) {
+          document.getElementById("redirectingOrder").href = "/createOrder";
+        }
+        else {
+          togglePopup();
+        }
+      }
+    </script>
+    <span class="btn btn-outline-primary" id="vxod" onclick="togglePopup()">Вход / Регистрация
+    </span>
+    <!-- user profile -->
+    <span id="userProfileR">
+      <i class="fas fa-user-circle"></i>
+    </span>
+    <span id="userProfileR" class="usernamePart">
+      <small id="userProfile">
+      </small>
+    </span>
+    <span id="vihod" onclick="logOut()">
+      Выход
+    </span>
+    <!-- script for setting user profile -->
+    <script>
+      let token = JSON.parse(window.localStorage.getItem('token'));
+      let showRegister = document.getElementById("vxod");
+      let showUserProfile = document.getElementById("userProfileR");
+      let showLogOut = document.getElementById("vihod");
+      if (token === null) {
+        showRegister.style.display = "inline";
+        showUserProfile.style.display = "none";
+        showLogOut.style.display = "none";
+      }
+      else {
+        showRegister.style.display = "none";
+        //  get user profile
+        axios({
+          method: "post",
+          headers: { 'Authorization': ' Bearer ' + token },
+          url: 'http://95.217.183.114/order-api/user/profile',
+        })
+          .then(function (response) {
+            // Get Current User Profile
+            let userName = response.data.data.name;
+            document.getElementById("userProfile").innerHTML = userName;
+            // setting userprofile appearance
+            showUserProfile.style.display = "inline";
+            // setting logout appearance
+            showLogOut.style.display = "inline";
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+      }
+      function logOut() {
+        window.localStorage.removeItem('token');
+        location.reload();
+      }
+    </script>
+
+  </div>
+  <form action="/createOrder" method="GET" id="form">
+    <div class="popup" id="popup-1">
+      <div class="content">
+        <div class="close-btn" onclick="togglePopup()">×</div>
+        <h1 class="voyti">Войти</h1>
+        <div class="input-field">
+          <input placeholder="номер телефона" class="validate" type="tel" value="+998" id="phoneNumber" maxlength="13">
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
+        </div>
+        <button type="submit" class="second-button" id="signIn">Войти</button>
+        <p class="regP"> <span id="regText">У вас нет аккаунта? </span><span class="registration" onclick="regform()">
+            Регистрация</span></p>
+      </div>
+    </div>
+  </form>
+  <!-- script for disabling keyboard inputs -->
+  <script>
+    $('.validate').keydown(function (e) {
+      var ingnore_key_codes = [9, 13, 19, 20, 27, 32, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 106, 109, 110, 111, 186, 188, 189, 190, 191, 219, 220, 221, 222];
+      if ($.inArray(e.keyCode, ingnore_key_codes) >= 0) {
+        e.preventDefault();
+      }
+    });
+    $('.validate').keypress(function (e) {
+      var ingnore_key_codes = [9, 13, 19, 20, 27, 32, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 106, 109, 110, 111, 186, 188, 189, 190, 191, 219, 220, 221, 222];
+      if ($.inArray(e.keyCode, ingnore_key_codes) >= 0) {
+        e.preventDefault();
+      }
+    });
+
+  </script>
+
+
+  <!-- script for error messages -->
+  <script>
+
+    var form = document.getElementById("form");
+    var phoneNumber = document.getElementById("phoneNumber");
+
+    form.addEventListener("submit", function () {
+      event.preventDefault();
+      checkInputs();
+    });
+    function checkInputs() {
+      var phoneNumberValue = phoneNumber.value;
+      if (phoneNumberValue.length === 9 || phoneNumberValue.length === 13) {
+        setSuccessFor(phoneNumber);
+      } else {
+        setErrorFor(phoneNumber, "Номер не может быть пустым");
+      }
+
+      if ($("#imya").length === 1) {
+        var name = document.getElementById("imya");
+        var nameValume = name.value;
+        if (nameValume === "") {
+          setErrorFor(name, "Имя не может быть пустым")
+        } else {
+          setSuccessFor(name);
+        }
+      }
+
+      if ($("#smsCode").length === 1) {
+
+        // sms code verification
+        var smsCode = document.getElementById("smsCode");
+        var smsCodeValue = smsCode.value;
+        if (smsCodeValue.length !== 4) {
+          setErrorFor(smsCode, "SMS-код введен неверно");
+        }
+        else {
+          setSuccessFor(smsCode);
+        }
+      }
+
+
+      // sign-up start
+      if ($("#smsCode").length !== 1 && $("#phoneNumber").length === 1 && $("#imya").length === 1) {
+        let phoneNumberValue = $("#phoneNumber").val();
+        let usernameValue = $("#imya").val();
+        if ((phoneNumberValue.length === 13 || phoneNumberValue.length === 9) && usernameValue !== "") {
+          if (phoneNumberValue[0] === '+') {
+            var cuttedPV = '';
+            for (let i = 4; i <= 12; i++) {
+              cuttedPV += phoneNumberValue[i];
+            }
+            phoneNumberValue = cuttedPV;
+          }
+          else {
+            phoneNumberValue = phoneNumberValue;
+          }
+
+          axios({
+            method: "post",
+            url: "http://95.217.183.114/order-api/user/sign-up/start",
+            data: {
+              name: usernameValue,
+              phone: phoneNumberValue,
+              region: "Chilonzor",
+              type: "individual"
+            }
+          }).then((response) => {
+            if (response.status === 200) {
+              // adding sms code input 
+              if ($("#smsCode").length !== 1) {
+                $("#signIn").before(`
+             <div class="input-field">
+                 <input placeholder="Введите смс код" class="validate" type="tel" id="smsCode" maxlength = "4">
+                       <i class="fas fa-check-circle"></i>
+                       <i class="fas fa-exclamation-circle"></i>
+                       <small id="smscodeSmall">Error message</small>
+                       <br class="breakTag"><br class="breakTag">
+                       <div class="secundometrPart">
+                        <span id="secundometr">    
+                        </span>
+                        <span class="resendCode" style="padding-left:17px" onclick="resendCodeSms()">  Отправить смс повторно</span>
+                       </div>
+            </div>
+             `);
+                // disabling letter inputs
+                $('.validate').keydown(function (e) {
+                  var ingnore_key_codes = [9, 13, 19, 20, 27, 32, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 106, 109, 110, 111, 186, 188, 189, 190, 191, 219, 220, 221, 222];
+                  if ($.inArray(e.keyCode, ingnore_key_codes) >= 0) {
+                    e.preventDefault();
+                  }
+                });
+                $('.validate').keypress(function (e) {
+                  var ingnore_key_codes = [9, 13, 19, 20, 27, 32, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 106, 109, 110, 111, 186, 188, 189, 190, 191, 219, 220, 221, 222];
+                  if ($.inArray(e.keyCode, ingnore_key_codes) >= 0) {
+                    e.preventDefault();
+                  }
+                });
+                // adding secundometr
+                var myVar = setInterval(myTimer, 1000);
+                var t = 60;
+                function myTimer() {
+                  if (t === 0 || t < 0) {
+                    clearInterval(myVar);
+                    document.getElementById("smsCode").disabled = true;
+
+                  }
+                  if ($("#secundometr").length === 1) {
+
+                    document.getElementById("secundometr").innerHTML = t;
+                    t--;
+                  }
+                }
+
+
+              }
+            }
+          }).catch((error) => {
+            if (error.response.data.code === 56001) {
+              alert("Пользователь с этим телефоном уже существует");
+            }
+            else if (error.response.data.code === 55001) {
+              alert("Ошибка проверки");
+            }
+            else if (error.response.data.code === 55000) {
+              alert("Неизвестная ошибка");
+            }
+          });
+
+        }
+
+      }
+
+      // sign-up finish part
+      if ($("#smsCode").length === 1 && $("#phoneNumber").length === 1 && $("#imya").length === 1) {
+        let phoneNumberValue = $("#phoneNumber").val();
+        let smsCodeValue = $("#smsCode").val();
+
+        if ((phoneNumberValue.length === 13 || phoneNumberValue.length === 9) && smsCodeValue.length === 4) {
+          if (phoneNumberValue[0] === '+') {
+            var cuttedPV = '';
+            for (let i = 4; i <= 12; i++) {
+              cuttedPV += phoneNumberValue[i];
+            }
+            phoneNumberValue = cuttedPV;
+          }
+          else {
+            phoneNumberValue = phoneNumberValue;
+          }
+          axios({
+            method: "post",
+            url: "http://95.217.183.114/order-api/user/sign-up/finish",
+            data: {
+              phone: phoneNumberValue,
+              otp: smsCodeValue
+            }
+          })
+            .then(function (response) {
+              window.localStorage.setItem('token', JSON.stringify(response.data.token));
+              location.reload();
+            })
+            .catch(function (error) {
+              if (error.response.data.code === 55000) {
+                alert("Неизвестная ошибка");
+              }
+              else if (error.response.data.code === 55001) {
+                alert("Ошибка проверки");
+              }
+              else if (error.response.data.code === 56002) {
+                alert("Пользователь не найден");
+              }
+              else if (error.response.data.code === 56003) {
+                alert("Код не совпадает");
+              }
+              else if (error.response.data.code === 56005) {
+                alert("Срок действия одноразового пароля истек");
+              }
+            });
+
+        }
+
+      }
+
+      //  sign-in finish part
+      if ($("#smsCode").length === 1 && $("#phoneNumber").length === 1 && $("#imya").length !== 1) {
+        let smsCodeValue = $("#smsCode").val();
+        let phoneNumberValue = $("#phoneNumber").val();
+
+        if (smsCodeValue.length === 4 && (phoneNumberValue.length === 13 || phoneNumberValue.length === 9)) {
+          if (phoneNumberValue[0] === '+') {
+            var cuttedPV = '';
+            for (let i = 4; i <= 12; i++) {
+              cuttedPV += phoneNumberValue[i];
+            }
+            phoneNumberValue = cuttedPV;
+          }
+          else {
+            phoneNumberValue = phoneNumberValue;
+          }
+          axios({
+            method: "post",
+            url: "http://95.217.183.114/order-api/user/sign-in/finish",
+            data: {
+              phone: phoneNumberValue,
+              otp: smsCodeValue
+            }
+          })
+            .then(function (response) {
+              window.localStorage.setItem('token', JSON.stringify(response.data.token));
+              location.reload();
+            })
+            .catch(function (error) {
+
+              if (error.response.data.code === 55000) {
+                alert("Неизвестная ошибка");
+              }
+              else if (error.response.data.code === 55001) {
+                alert("Ошибка проверки");
+              }
+              else if (error.response.data.code === 56002) {
+                alert("Пользователь не найден");
+              }
+              else if (error.response.data.code === 56003) {
+                alert("Код не совпадает");
+              }
+              else if (error.response.data.code === 56005) {
+                alert("Срок действия одноразового пароля истек");
+              }
+
+            });
+
+        }
+      }
+
+
+    }
+
+    function setErrorFor(inputType, msg) {
+      const errHandler = inputType.parentElement;
+      const small = errHandler.querySelector("small");
+      errHandler.className = "input-field error";
+      small.innerText = msg;
+    }
+
+    async function setSuccessFor(inputType) {
+      const errHandler = inputType.parentElement;
+      errHandler.className = "input-field success";
+      // formatting phone number for server 
+      var postedPhoneN = inputType.value;
+      if (postedPhoneN[0] === '+') {
+        var cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += postedPhoneN[i];
+        }
+        postedPhoneN = cuttedPV;
+      }
+      else {
+        postedPhoneN = postedPhoneN;
+      }
+      // making post request to sign in user 
+      if ($("#imya").length !== 1 && $('#smsCode').length !== 1) {
+        axios({
+          method: "post",
+          url: "http://95.217.183.114/order-api/user/sign-in/start",
+          data: {
+            phone: postedPhoneN,
+            region: "Chilonzor"
+          }
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              // adding sms code input 
+              if ($("#smsCode").length !== 1) {
+                $("#signIn").before(`
+             <div class="input-field">
+                 <input placeholder="Введите смс код" class="validate" type="tel" id="smsCode" maxlength = "4">
+                       <i class="fas fa-check-circle"></i>
+                       <i class="fas fa-exclamation-circle"></i>
+                       <small id="smscodeSmall">Error message</small>
+                       <br class="breakTag"><br class="breakTag">
+                       <div class="secundometrPart">
+                        <span id="secundometr">    
+                        </span>
+                        <span class="resendCode" style="padding-left:17px" onclick="resendCodeSms()">  Отправить смс повторно</span>
+                       </div>
+            </div>
+             `);
+
+                $("#signIn").html("Подтверждать");
+                // disabling letter inputs
+                $('.validate').keydown(function (e) {
+                  var ingnore_key_codes = [9, 13, 19, 20, 27, 32, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 106, 109, 110, 111, 186, 188, 189, 190, 191, 219, 220, 221, 222];
+                  if ($.inArray(e.keyCode, ingnore_key_codes) >= 0) {
+                    e.preventDefault();
+                  }
+                });
+                $('.validate').keypress(function (e) {
+                  var ingnore_key_codes = [9, 13, 19, 20, 27, 32, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 106, 109, 110, 111, 186, 188, 189, 190, 191, 219, 220, 221, 222];
+                  if ($.inArray(e.keyCode, ingnore_key_codes) >= 0) {
+                    e.preventDefault();
+                  }
+                });
+                // adding secundometr
+                var myVar = setInterval(myTimer, 1000);
+                var t = 60;
+                function myTimer() {
+                  if (t === 0 || t < 0) {
+                    clearInterval(myVar);
+                    document.getElementById("smsCode").disabled = true;
+
+                  }
+                  if ($("#secundometr").length === 1) {
+                    document.getElementById("secundometr").innerHTML = t;
+                    t--;
+                  }
+                }
+              }
+
+            }
+          }, (error) => {
+            if (error.response.data.code === 55000) {
+              alert("Неизвестная ошибка");
+            }
+            else if (error.response.data.code === 55001) {
+              alert("Ошибка проверки");
+            }
+            else if (error.response.data.code === 56002) {
+              alert("Пользователь не найден");
+            }
+            else if (error.response.data.code === 56004) {
+              alert("Слишком частые попытки");
+            }
+          });
+      }
+
+      // try {
+      //   const result = await axios({
+      //     url: 'http://95.217.183.114/order-api/user/sign-in/start',
+      //     method: 'POST',
+      //     data: {
+      //       phone: "998944088",
+      //       region: "Chilonzor"
+      //     },
+      //     headers: {
+      //       'Accept': 'application/json',
+      //       'Content-Type': 'application/json',
+      //       headers: {
+      //         'Content-Type': 'application/json'
+      //       }
+      //     }
+      //   })
+      // } catch (error) {
+      //   console.log(error)
+      // }
+
+      // axios
+      // .post('http://95.217.183.114/order-api/user/sign-in/start',{
+
+      // },{
+      //   headers:{
+      //     "content-type": "application/json"
+      //   }
+      // }
+      // ).then(resp => {
+      //     console.log(resp);
+      // })
+      // .catch(err=> {
+      //       console.log(err);
+      // });
+
+
+    }
+
+    // resending sms code
+    function resendCodeSms() {
+      // formatting phone number
+      let signInPostedPhoneValue = document.getElementById("phoneNumber").value;
+      if (signInPostedPhoneValue[0] === '+') {
+        let cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += signInPostedPhoneValue[i];
+        }
+        signInPostedPhoneValue = cuttedPV;
+      }
+      else {
+        signInPostedPhoneValue = signInPostedPhoneValue;
+      }
+
+
+      if (document.getElementById("secundometr").innerHTML == 0) {
+        // adding secundometr
+        var myVar = setInterval(myTimer, 1000);
+        var t = 60;
+        function myTimer() {
+          if (t === 0 || t < 0) {
+            clearInterval(myVar);
+            document.getElementById("smsCode").disabled = true;
+          }
+          if (t !== 0 && $("#smsCode").length === 1) {
+            document.getElementById("smsCode").disabled = false;
+          }
+          if ($("#smsCode").length === 1) {
+            document.getElementById("secundometr").innerHTML = t;
+            t--;
+          }
+        }
+
+        // resending sms code to sign-in process
+        if (t !== 0 && $("#imya").length !== 1) {
+
+          axios({
+            method: "post",
+            url: "http://95.217.183.114/order-api/user/sign-in/start",
+            data: {
+              phone: signInPostedPhoneValue,
+              region: "Chilonzor"
+            }
+          }).then(function (response) {
+
+          }).catch(function (error) {
+            if (error.response.data.code === 55000) {
+              alert("Неизвестная ошибка");
+            }
+            else if (error.response.data.code === 55001) {
+              alert("Ошибка проверки");
+            }
+            else if (error.response.data.code === 56002) {
+              alert("Пользователь не найден");
+            }
+            else if (error.response.data.code === 56004) {
+              alert("Слишком частые попытки");
+            }
+          });
+
+        }
+        // resending sms code for sign-up process
+        if (t !== 0 && $("#imya").length === 1) {
+          axios({
+            method: "post",
+            url: "http://95.217.183.114/order-api/user/sign-up/resend-otp",
+            data: {
+              phone: signInPostedPhoneValue
+            }
+          }).then(function (response) {
+
+          }).catch(function (error) {
+            if (error.response.data.code === 55000) {
+              alert("Неизвестная ошибка");
+            }
+            else if (error.response.data.code === 55001) {
+              alert("Ошибка проверки");
+            }
+            else if (error.response.data.code === 56002) {
+              alert("Пользователь не найден");
+            }
+            else if (error.response.data.code === 56004) {
+              alert("Слишком частые попытки");
+            }
+          });
+        }
+      }
+    }
+  </script>
+
+  <!-- Script for registration form  -->
+  <script>
+    function togglePopup() {
+      var el = document.getElementById("popup-1");
+      el.classList.toggle("active");
+      if (el.className === "popup") {
+        document.body.style.overflowY = "scroll";
+      }
+      else {
+        document.body.style.overflowY = "hidden";
+      }
+    }
+
+
+    function regform() {
+      phoneNumber.parentElement.className = "input-field";
+      if ($("#imya").length === 1) {
+        // removing errror messages` icon from input 
+        let name = document.getElementById("imya");
+        name.parentElement.className = "input-field";
+        // removing smscode input
+      }
+      if ($("#smsCode").length === 1) {
+        // removing error messages` icon from input
+        let smsCodeName = document.getElementById("smsCode");
+        smsCodeName.parentElement.className = "input-field";
+      }
+
+      if ($("#imya").length !== 1) {
+        $("#signIn").before(`<div class="input-field">
+          <input placeholder="Имя" class="validate" id="imya">
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <small>Error message</small>
+          </div>`);
+        $(".registration").text("Вход");
+        $(".voyti").text("Регистрация");
+        $("#signIn").html("Регистрация");
+        $('#smsCode').remove();
+        $(".secundometrPart").remove();
+        $(".breakTag").remove();
+        $("#regText").text("Вы уже зарегистрированы? ");
+      }
+
+      else {
+        $("#imya").remove();
+        $(".registration").text("Регистрация");
+        $(".voyti").text("Вход");
+        $("#signIn").html("Вход");
+        $("#regText").text("У вас нет аккаунта? ");
+        $(".secundometrPart").remove();
+        $('#smsCode').remove();
+      }
+
+    }
+  </script>
+
+  <div style="background-color: #edf6ff;" class="pt-5 pb-3 ">
+    <div class="container cotainerAll">
+      <div class="row pt-4 removeMargin">
+        <div class="col-md-5">
+          <h2 class="font-weight-normal text-head" style="font-size: 30px;">Срочная доставка по Ташкенту <nobr> от 10
+              000
+              UZS <i class="icon icon-currency icon-ruble price-sign"></i>
+            </nobr>
+          </h2>
+          <div class="head-text">Курьер заберёт и доставит посылку в удобное вам время.</div>
+        </div>
+        <div class=" col-md-7 removePadding">
+          <div style="background-color: #FFF; box-shadow: 0 14px 20px 0 rgba(164, 182, 206, 0.5);" class="p-3">
+            <div class="">
+              <div class="form">
+
+                <!-- google places api set up-->
+                <script
+                  src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"
+                  async defer>
+                  </script>
+                <script>
+                  let autocomplete;
+                  function initAutocomplete() {
+                    // avoiding form to trigger submit when inside the text input enter is pressed 
+                    $('.form-control').keydown(function (e) {
+                      if (e.keyCode == 13) {
+                        e.preventDefault();
+                        return false;
+                      }
+                    });
+
+                    autocomplete = new google.maps.places.Autocomplete(
+                      document.getElementById("exampleInputEmail1"),
+                      {
+                        types: ['establishment'],
+                        componentRestrictions: { 'country': ['UZ'] },
+                        fields: ['place_id', 'geometry', 'name']
+                      }
+                    );
+                    // autocomplete.addListener('place_changed', onPlaceChanged);   
+                    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                      var place = autocomplete.getPlace();
+                      if (!place.geometry) {
+                        document.getElementById("lat").value = "";
+                        document.getElementById("lng").value = "";
+                        document.getElementById("name").value = "";
+                        document.getElementById("exampleInputEmail1Copy").value = "";
+                      }
+                      else {
+                        document.getElementById("lat").value = place.geometry.location.lat();
+                        document.getElementById("lng").value = place.geometry.location.lng();
+                        document.getElementById("name").value = place.name;
+                        document.getElementById("exampleInputEmail1Copy").value = document.getElementById("exampleInputEmail1").value;
+                      }
+                    });
+
+                    // adding autocomplete google maps js api to second input in the form
+
+                    autocomplete2 = new google.maps.places.Autocomplete(
+                      document.getElementById("exampleInputPassword1"),
+                      {
+                        types: ['establishment'],
+                        componentRestrictions: { 'country': ['UZ'] },
+                        fields: ['place_id', 'geometry', 'name']
+                      }
+                    );
+
+                    google.maps.event.addListener(autocomplete2, 'place_changed', function () {
+                      var place = autocomplete2.getPlace();
+                      if (!place.geometry) {
+                        document.getElementById("lat2").value = "";
+                        document.getElementById("lng2").value = "";
+                        document.getElementById("name2").value = "";
+                        document.getElementById("exampleInputPassword1Copy").value = "";
+                      }
+                      else {
+                        document.getElementById("lat2").value = place.geometry.location.lat();
+                        document.getElementById("lng2").value = place.geometry.location.lng();
+                        document.getElementById("name2").value = place.name;
+                        document.getElementById("exampleInputPassword1Copy").value = document.getElementById("exampleInputPassword1").value;
+                      }
+                    });
+
+
+
+                  }
+
+                  // function onPlaceChanged() {
+                  //   alert("sdsd");
+
+                  //   let place = autocomplete.getPlace();
+                  //   if (!place.geometry) {
+                      // User  did not select a prediction ; reset input field
+                      // document.getElementById("exampleInputEmail1").placeholder = 'Введите место';
+                    // }
+                    // else {
+                      // Display details about the valid place
+                      // document.getElementById("details").innerHTML = place.name;
+                  //     alert(place.geometry);
+
+                  //   }
+
+                  // }
+
+                </script>
+
+                <form method="post" action="/createOrder" autocomplete="off">
+                  <div class="form-group">
+                    <input autocomplete="off" placeholder="Адрес отправки" type="text" class="form-control"
+                      id="exampleInputEmail1" aria-describedby="emailHelp" name="input1">
+                    <small class="AdressErrindex"> пожалуйста, нажмите на адрес,<span class="spantxt">рекомендованный
+                        <span>Google</span></span></small>
+                    <input name="input1lat" style="display: none;" type="text" value="" id="lat">
+                    <input name="input1lng" style="display: none;" type="text" value="" id="lng">
+                    <input name="input1name" style="display: none;" type="text" value="" id="name">
+                    <input autocomplete="off" type="text" value="" id="exampleInputEmail1Copy" style="display: none;">
+                  </div>
+                  <div class="form-group">
+                    <input autocomplete="off" placeholder="Адрес доставки" type="text" class="form-control"
+                      id="exampleInputPassword1" aria-describedby="PasswordHelp" name="input2">
+                    <small class="AdressErrindex"> пожалуйста, нажмите на адрес,<span class="spantxt">рекомендованный
+                        <span>Google</span></span></small>
+                    <input name="input2lat" style="display: none;" type="text" value="" id="lat2">
+                    <input name="input2lng" style="display: none;" type="text" value="" id="lng2">
+                    <input name="input2name" style="display: none;" type="text" value="" id="name2">
+                    <input autocomplete="off" type="text" value="" id="exampleInputPassword1Copy"
+                      style="display: none;">
+                  </div>
+                  <div>
+                    <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                      <li class="nav-item text-center p-1" role="presentation" style="width: 33.33%;">
+                        <a class="nav-link active p-1" id="peshkomlink" data-toggle="tab" href="#home" role="tab"
+                          aria-controls="home" aria-selected="true" onclick="peshkomlinkClicked()">Пешком</a>
+                      </li>
+                      <li class="nav-item text-center p-1" role="presentation" style="width: 33.33%;">
+                        <a class="nav-link p-1" id="avtomobilLink" data-toggle="tab" href="#profile" role="tab"
+                          aria-controls="profile" aria-selected="false" onclick="avtomobillinkClicked()">Автомобилем</a>
+                      </li>
+                      <li class="nav-item text-center p-1" role="presentation" style="width: 33.33%;">
+                        <a class="nav-link p-1" id="gruzovoyLink" data-toggle="tab" href="#contact" role="tab"
+                          aria-controls="contact" aria-selected="false" onclick="gruzovoylinkClicked()">Грузовиком</a>
+                      </li>
+                      <input type="text" value="" name="clickedBtnName" id="clickedBtn" style="display:none">
+                    </ul>
+                  </div>
+                  <button style="background-color: #ff3e80;" onclick="checkTokenforRaschitat()" id="raschitat"
+                    class="btn btn-primary pt-2 pb-2 border-0 w-100">Рассчитать стоимость</button>
+                  <div class="text-center text-secondary pt-3">Заказ без регистрации, оплата по факту доставки</div>
+                </form>
+
+                <!-- checking user has token or not and validating form before submit -->
+                <script>
+
+                  function checkTokenforRaschitat() {
+                    let token = window.localStorage.getItem('token');
+                    if (token !== null) {
+                      // first input validation
+                      let input1 = document.getElementById("exampleInputEmail1").value;
+                      let input1Copy = document.getElementById("exampleInputEmail1Copy").value;
+                      let lat1 = document.getElementById("lat").value;
+                      if (input1 !== input1Copy || (input1 === input1Copy && lat1 === "")) {
+                        $("#exampleInputEmail1").addClass("errorMsg");
+                      }
+                      else {
+                        $("#exampleInputEmail1").removeClass("errorMsg");
+                      }
+                      // second input validation
+                      let input2 = document.getElementById("exampleInputPassword1").value;
+                      let input2Copy = document.getElementById("exampleInputPassword1Copy").value;
+                      let lat2 = document.getElementById("lat2").value;
+                      if (input2 !== input2Copy || (input2 === input2Copy && lat2 === "")) {
+                        $("#exampleInputPassword1").addClass("errorMsg");
+                      }
+                      else {
+                        $("#exampleInputPassword1").removeClass("errorMsg");
+                      }
+
+                      if ($("#exampleInputEmail1").hasClass("errorMsg") == 0 && $("#exampleInputPassword1").hasClass("errorMsg") == 0) {
+                        document.getElementById("raschitat").type = "submit";
+                      }
+                      else {
+                        event.preventDefault();
+                      }
+                    }
+                    else {
+                      event.preventDefault();
+                      window.scrollTo(0,0);
+                      togglePopup();
+                    }
+                  }
+                </script>
+
+                <!-- script for form  input selecting-->
+
+                <script>
+
+                  let peshkomlink = document.getElementById("peshkomlink");
+                  let avtomobilLink = document.getElementById("avtomobilLink");
+                  let gruzovoyLink = document.getElementById("gruzovoyLink");
+                  let clickedBtnName = document.getElementById("clickedBtn");
+
+                  function peshkomlinkClicked() {
+                    peshkomlink.style.border = "1px solid red";
+                    peshkomlink.style.color = "red";
+                    avtomobilLink.style.border = "1px solid transparent";
+                    avtomobilLink.style.color = "#333c4e";
+                    gruzovoyLink.style.border = "1px solid transparent";
+                    gruzovoyLink.style.color = "#333c4e";
+                    clickedBtnName.value = "peshkom";
+                  }
+
+                  function avtomobillinkClicked() {
+                    peshkomlink.style.border = "1px solid transparent";
+                    peshkomlink.style.color = "#333c4e";
+                    avtomobilLink.style.border = "1px solid red";
+                    avtomobilLink.style.color = "red";
+                    gruzovoyLink.style.border = "1px solid transparent";
+                    gruzovoyLink.style.color = "#333c4e";
+                    clickedBtnName.value = "avtomobil";
+                  }
+
+                  function gruzovoylinkClicked() {
+                    peshkomlink.style.border = "1px solid transparent";
+                    peshkomlink.style.color = "#333c4e";
+                    avtomobilLink.style.border = "1px solid transparent";
+                    avtomobilLink.style.color = "#333c4e";
+                    gruzovoyLink.style.border = "1px solid red";
+                    gruzovoyLink.style.color = "red";
+                    clickedBtnName.value = "gruzovoy";
+                  }
+
+                </script>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center pt-5">
+        <span class="pr-2"><strong class="pr-2">За 3 месяца:</strong>
+          1412360 доставок </span>
+        |<span class="pl-2 pr-2"> среднее время подачи курьера 45 минут</span>
+
+        | <span class="pl-2"> 95365 активных курьеров</span>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div style="background-color: #fbfbfb;">
+    <div class="container pt-5">
+      <h2 class="text-center pb-3">Ускорить оформление заказа</h2>
+
+      <div class="card-deck mb-3">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h6 class="card-title" style="width: 75px;">ДЛЯ ВСЕХ</h6>
+            <h4 class="card-subtitle mb-2">Массовая загрузка</h4>
+            <p class="card-text">Ближайший курьер заберёт товары, документы или привезёт забытую вещь. Просто как такси,
+              только дешевле.</p>
+          </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h6 class="card-title" style="width: 75px;">ДЛЯ ВСЕХ</h6>
+            <h4 class="card-subtitle mb-2">За 30 минут</h4>
+            <p class="card-text">Ближайший курьер заберёт товары, документы или привезёт забытую вещь. Просто как такси,
+              только дешевле.</p>
+          </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h6 class="card-title" style="width: 75px;">ДЛЯ ВСЕХ</h6>
+            <h4 class="card-subtitle mb-2">В течение дня</h4>
+            <p class="card-text">Ближайший курьер заберёт товары, документы или привезёт забытую вещь. Просто как такси,
+              только дешевле.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center container p-5">
+      <h3 class="">Компенсируем до <div></div>1000 000 UZS в случае потери или повреждения</h3>
+      <h6 class="text-secondary">Вернём объявленную вами ценность в течение трёх рабочих дней.</h6>
+    </div>
+
+    <div class="pb-3 container">
+      <div class="card" style="background-image: url(../IMG/background.png)">
+        <h3 class="pb-4">Пригодиться для бизнеса</h3>
+        <ul class="ecommerce-stuff__list">
+          <li class="ecommerce-stuff__list-item">
+            <div class="ecommerce-stuff__list-item-header"> Выкуп товара за&nbsp;наличные </div>
+            <div class="ecommerce-stuff__list-item-description"> Курьер купит ваш товар ему
+              заплатит ваш покупатель. </div>
+          </li>
+          <li class="ecommerce-stuff__list-item">
+            <div class="ecommerce-stuff__list-item-header"> Перевод выручки за&nbsp;товар </div>
+            <div class="ecommerce-stuff__list-item-description"> Курьер переведёт деньги от&nbsp;покупателей, которые
+              не&nbsp;любят предоплату. </div>
+          </li>
+          <li class="ecommerce-stuff__list-item">
+            <div class="ecommerce-stuff__list-item-cloud">
+            </div>
+            <div class="ecommerce-stuff__list-item-header"> Расчётно-кассовое<br>обслуживание </div>
+            <div class="ecommerce-stuff__list-item-description"> Курьер отправит покупателю чек, даже если у&nbsp;вас
+              нет кассы. </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="pt-5 pb-5 container">
+      <h2 class="text-center pb-3">Ускорит оформление заказа</h2>
+      <div class="card-deck mb-3">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h6 class="card-title" style="width: 75px;">ДЛЯ ВСЕХ</h6>
+            <h4 class="card-subtitle mb-2">Массовая загрузка</h4>
+            <p class="card-text">Ближайший курьер заберёт товары, документы или привезёт забытую вещь. Просто как
+              такси,
+              только дешевле.</p>
+          </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h6 class="card-title" style="width: 75px;">ДЛЯ ВСЕХ</h6>
+            <h4 class="card-subtitle mb-2">За 30 минут</h4>
+            <p class="card-text">Ближайший курьер заберёт товары, документы или привезёт забытую вещь. Просто как
+              такси,
+              только дешевле.</p>
+          </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h6 class="card-title" style="width: 75px;">ДЛЯ ВСЕХ</h6>
+            <h4 class="card-subtitle mb-2">В течение дня</h4>
+            <p class="card-text">Ближайший курьер заберёт товары, документы или привезёт забытую вещь. Просто как
+              такси,
+              только дешевле.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="layout__section layout__section--pls-install-app">
+      <section class="pls-install-app ">
+        <div class="pls-install-app__content container">
+          <h2 class="pls-install-app__header">Установите приложение, и&nbsp;все курьеры будут как на&nbsp;ладони</h2>
+          <p class="pls-install-app__description" style="font-weight:bold;">В&nbsp;любую свободную минуту создавайте
+            новые заказы и&nbsp;следите
+            за&nbsp;выполнением уже созданных.</p>
+          <div class="pls-install-app__links">
+            <a href="#" class="pls-install-app__qr-code" id="qrcoder">
+              <img src="../IMG/qr.png" alt="QR-code"> </a>
+            <div class="pls-install-app__apps"> <a class="pls-install-app__link"
+                href="https://iphone.apkpure.com/emu-express/uz.invan.emu-uz" target="_blank"> <img
+                  src="../IMG/appstore.svg" alt="appstore-badge" class="pls-install-app__link-img"> </a>
+              <a class="pls-install-app__link" id="playstoreId" href="#" target="_blank"> <img
+                  src="../IMG/playstore.svg" alt="google-badge" class="pls-install-app__link-img"> </a>
+            </div>
+            <script>
+              document.getElementById("qrcoder").addEventListener("click",
+                function (event) {
+                  event.preventDefault();
+                });
+              document.getElementById("playstoreId").addEventListener("click",
+                function (event) {
+                  event.preventDefault();
+                });
+            </script>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="pt-5 container">
+      <div>
+        <h2 class="text-center pl-5 pr-5"><a href="https://emu.uz/">emu.uz</a> — это революция на рынке срочной
+          курьерской доставки</h2>
+      </div>
+      <div class="dv-small-card-list">
+        <ul class="dv-small-card-list__items">
+          <li class="dv-small-card-list__item">
+            <div class="dv-small-card-list__image">
+              <div class="dv-icon dv-icon--calc"></div>
+            </div>
+            <div class="dv-small-card-list__text">Мгновенный расчёт стоимости в форме заказа, цена обновляется в
+              процессе заполнения формы.</div>
+          </li>
+          <li class="dv-small-card-list__item">
+            <div class="dv-small-card-list__image">
+              <div class="dv-icon dv-icon--rate"></div>
+            </div>
+            <div class="dv-small-card-list__text">За 7 минут назначим на заказ ближайшего курьера с самым высоким
+              рейтингом.</div>
+          </li>
+          <li class="dv-small-card-list__item">
+            <div class="dv-small-card-list__image">
+              <div class="dv-icon dv-icon--rocket"></div>
+            </div>
+            <div class="dv-small-card-list__text">Оформить заказ на курьерскую или грузовую доставку можно без
+              регистрации и договора.</div>
+          </li>
+          <li class="dv-small-card-list__item">
+            <div class="dv-small-card-list__image">
+              <div class="dv-icon dv-icon--wizard"></div>
+            </div>
+            <div class="dv-small-card-list__text">Маршрут по доставке можно менять на ходу. Все изменения мгновенно
+              отображаются у курьера.</div>
+          </li>
+          <li class="dv-small-card-list__item">
+            <div class="dv-small-card-list__image">
+              <div class="dv-icon dv-icon--card"></div>
+            </div>
+            <div class="dv-small-card-list__text">Оплачивать доставку можно картой или наличными на любом из адресов
+              заказа. Для юрлиц доступен безнал.</div>
+          </li>
+          <li class="dv-small-card-list__item">
+            <div class="dv-small-card-list__image">
+              <div class="dv-icon dv-icon--sms"></div>
+            </div>
+            <div class="dv-small-card-list__text">Смс-уведомления на каждом адресе по мере выполнения заказа.</div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="layout__section">
+      <div class="layout__content-wrapper layout__content-wrapper--columns container">
+        <div class="layout__column ">
+          <div class="payment">
+            <div class="payment__header">
+              <h3 class="payment__title">Способы оплаты</h3> <span class="payment__subtitle">Оплачивайте курьерские
+                услуги удобным способом:</span>
+            </div>
+            <div class="payment__body">
+              <ul class="payment__list">
+                <li class="payment__item payment__icon payment__icon--ya-money"><span class="payment__name">CLICK 
+                   </span></li>
+                <li class="payment__item payment__icon payment__icon--ya-money"><span class="payment__name">CLICK 
+                    </span></li>
+                <li class="payment__item payment__icon payment__icon--ya-money"><span class="payment__name">CLICK 
+                    </span></li>
+                <li class="payment__item payment__icon payment__icon--ya-money"><span class="payment__name">CLICK 
+                    </span></li>
+                <li class="payment__item payment__icon payment__icon--ya-money"><span class="payment__name">CLICK 
+                    </span></li>
+                <li class="payment__item payment__icon payment__icon--ya-money"><span class="payment__name">CLICK 
+                    </span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="layout__column">
+          <div class="delivery">
+            <div class="delivery__header">
+              <h3 class="delivery__title">Доставим оптимальным способом</h3> <span class="delivery__subtitle">Документы,
+                покупки, технику, мебель,<br> любой груз весом до 1,5 т</span>
+              <div class="delivery__body">
+                <ul class="delivery__list">
+                  <li class="delivery__item"> <a href="#" class="delivery__link"> <i class="fas fa-walking"
+                        style="font-size: 32px;"></i> <span class="delivery__name">Пешком</span>
+                    </a> </li>
+                  <li class="delivery__item"> <a href="#" class="delivery__link"> <i class="fas fa-car "
+                        style="font-size: 32px;"></i> <span class="delivery__name">Автомобилем</span>
+                    </a> </li>
+                  <li class="delivery__item"> <a href="#" class="delivery__link"> <i class="fas fa-truck-moving"
+                        style="font-size: 32px;"></i> <span class="delivery__name">Грузовиком</span>
+                    </a> </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout__section">
+      <div class="layout__content-wrapper">
+        <h2 class="layout__content-header layout__content-header--small"><a href="https://emu.uz/">emu.uz</a> —
+          инновационная курьерская
+          служба экспресс-доставки день в день! </h2>
+        <div class="dv-index-info">
+          <div class="dv-index-info__text dv-index-info__text--fullwidth">
+            <p></p> 
+            <div class="about-text">
+              <p>
+                КУРЬЕРСКАЯ СЛУЖБА «EXPRESS MAIL UNIVERSAL»
+                Приоритеты компании – это доверие клиентов, надежность и безопасность перевозки, конфиденциальность и
+                защита информации. Мы постоянно совершенствуем наш сервис и предлагаем своим клиентам самые доступные
+                цены, а также гибкую систему скидок. Компания «Express Mail Universal» предлагает воспользоваться
+                услугами по экспресс-доставке и оценить наши преимущества.
+
+                Компания «Express Mail Universal» – зарегистрированный и лицензированный оператор курьерской доставки на
+                территории Республики Узбекистана. Обладая необходимым ресурсом, технологиями и собственным парком
+                транспортных средств, компания «Express Mail Universal» с 2016 года осуществляет регулярные доставки
+                документов и грузов между всеми юридическими и физическими лицами на территории Республики Узбекистана,
+                а также курьерскую доставку на дом или в офис.
+
+                «Express Mail Universal» заботится о своей репутации: наши обязательства перед клиентами всегда на
+                первом месте!
+              </p>
+            </div>
+            <p></p>
+            <p> </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer">
+        <ul class="social_networks">
+          <li><i class="social_icons fab fa-facebook"></i></li>
+          <li><i class="social_icons fab fa-twitter"></i></li>
+          <li><i class="social_icons fab fa-youtube"></i></li>
+          <li><i class="social_icons fab fa-instagram"></i></li>
+          <li><i class="social_icons fab fa-pinterest"></i></li>
+        </ul>
+
+
+        <span style="text-align: center; ">
+          <h5 class="my-0 font-weight-normal "><a href="#" class="nav-link font-weight-bold p-0"
+              style="color:white;font-size: 26px;"> <a style="color: white; font-weight: bold;"
+                href="https://emu.uz/">emu.uz</a></h5>
+          <small class="d-block mb-3  pt-2" style="font-size: 16px;color: #fbfbfb;">&copy; 2017-2021</small>
+        </span>
+
+      </div>
+    </footer>
+
+  </div>
+  </div>
+
+
+</body>
+
+</html>

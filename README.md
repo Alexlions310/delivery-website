@@ -1,0 +1,2 @@
+# Delivery website which automates delivery services for an Uzbek delivery company
+This a real problem solving project which automated one of the Uzbek delivery service company`s jobs. As a full stack web developer I use node js framework for backend, and for front-end part html, css, Vanilla js, Jquery, ejs templating, Axios js technologies are used. I creted front-end part without any framework.

@@ -1,0 +1,2705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Курьер-office</title>
+  <!-- Get fontawesome Kit-code -->
+  <script src="https://kit.fontawesome.com/cdb16a4fd9.js" crossorigin="anonymous"></script>
+  <link rel="shortcut icon" href="/IMG/favicons.png">
+  <link rel="stylesheet" href="/CSS3/style.css" />
+  <link rel="stylesheet" href="/CSS3/login.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/JS/jquery.formatCurrency-1.4.0.js"></script>
+  <style>
+    input[class="textkilo"]::placeholder {
+
+      /* Firefox, Chrome, Opera */
+      text-align: right;
+    }
+
+    input[class="textkilo"]:-ms-input-placeholder {
+
+      /* Internet Explorer 10-11 */
+      text-align: right;
+    }
+
+    input[class="textkilo"]::-ms-input-placeholder {
+
+      /* Microsoft Edge */
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- user validation -->
+  <script>
+    let tokenOfUser = window.localStorage.getItem('token');
+    if (tokenOfUser === null) {
+      window.location.replace("/");
+    }
+  </script>
+  <!-- navbar part -->
+  <div class="d-flex flex-column flex-md-row align-items-center container p-3 px-md-4 bg-white">
+    <h5 class="my-0 font-weight-normal">
+      <a href="/" class="nav-link font-weight-bold" style="color: rgb(255, 62, 128)">Курьер-office</a>
+    </h5>
+    <svg width="12px" height="12px" viewBox="0 0 16 16" class="bi bi-geo-alt-fill" fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd"
+        d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+    </svg>
+    <a class="nav-link hover-class text-dark mr-md-auto p-0 ml-2" data-toggle="dropdown" href="#" role="button"
+      aria-haspopup="true" aria-expanded="false">
+      Ташкент</a>
+    <!-- user profile -->
+    <span id="userProfileR">
+      <i class="fas fa-user-circle"></i>
+    </span>
+    <span id="userProfileR" class="usernamePart">
+      <small id="userProfile">
+      </small>
+    </span>
+    <span id="vihod" onclick="logOut()">
+      Выход
+    </span>
+    <!-- script for setting user profile -->
+    <script>
+      let token = JSON.parse(window.localStorage.getItem('token'));
+      let showUserProfile = document.getElementById("userProfileR");
+      let showLogOut = document.getElementById("vihod");
+      if (token === null) {
+        showUserProfile.style.display = "none";
+        showLogOut.style.display = "none";
+      }
+      else {
+        //  get user profile
+        axios({
+          method: "post",
+          headers: { 'Authorization': ' Bearer ' + token },
+          url: 'http://95.217.183.114/order-api/user/profile',
+        })
+          .then(function (response) {
+            // Get Current User Profile
+            let userName = response.data.data.name;
+            document.getElementById("userProfile").innerHTML = userName;
+            // setting userprofile appearance
+            showUserProfile.style.display = "inline";
+            // setting logout appearance
+            showLogOut.style.display = "inline";
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+      }
+      function logOut() {
+        window.localStorage.removeItem('token');
+        location.reload();
+      }
+    </script>
+  </div>
+  <!-- Заказ part -->
+  <div style="background-color: #f4f4f4; border-radius: 10px;">
+
+    <div id="bodyMargin">
+      <h1 class="">Заказ</h1>
+      <br />
+      <!-- dostavit method -->
+      <h5 class="">Когда забрать и доставить</h5>
+
+      <div id="dostavitMetod">
+        <div id="peshkom">
+          Пешком
+        </div>
+        <div id="legavto">
+          Легковой автомобиль
+        </div>
+        <div id="gruzovoy">
+          Грузовой
+        </div>
+      </div>
+      <br />
+      <!-- Ves category -->
+      <div id="vesposilkaTxt">
+        <p style="font-weight: bold;">Вес посылки</p>
+      </div>
+
+      <div id="vesposilka">
+
+        <div id="w-1">
+          до 50 кг
+        </div>
+        <div id="w-2">
+          до 100 кг
+        </div>
+        <div id="w-3">
+          до 150 кг
+        </div>
+        <div id="w-4">
+          до 200 кг
+        </div>
+
+      </div>
+
+      <!-- gruzovoy dostavat part -->
+      <div class="" id="gruzovoyDiv">
+
+        <div class="d-flex" id="jip1">
+          <div class="">
+            <img class="" src="../IMG/icon-pickup.png" alt="Джип/Пикап">
+          </div>
+          <div class="icon_text">
+            <span>Джип/Пикап</span>
+            <p>до 2 м3, 500 кг</p>
+          </div>
+        </div>
+
+        <div class="d-flex" id="kabluk2">
+          <div>
+            <img class="" src="../IMG/icon-kabluk.png" alt="Каблук">
+          </div>
+          <div class="icon_text">
+            <span>Каблук</span>
+            <p>до 3,2 м3, 700 кг</p>
+          </div>
+        </div>
+
+        <div class="d-flex" id="porter3">
+          <div>
+            <img class="" src="../IMG/icon-porter.png" alt="Портер">
+          </div>
+          <div class="icon_text">
+            <span>Портер</span>
+            <p>до 8 м3, 1000 кг</p>
+          </div>
+        </div>
+
+        <div class="d-flex" id="gazel4">
+          <div>
+            <img src="../IMG/icon-gazel.png" alt="Газель" class="">
+          </div>
+          <div class="icon_text">
+            <span>Газель</span>
+            <p>до 17 м3, 1500 кг</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Вес посылки -->
+
+      <div id="gruzovoyVes">
+        <br>
+        <p style="font-weight: bold;"> Вес посылки</p>
+        <input type="tel" placeholder="кг" id="focusme" class="textkilo" maxlength="4">*
+        <small class="vesgruzovoyErrorMsg">Вес не может быть пустым</small>
+      </div>
+      <script>
+        $('.textkilo').keydown(function (e) {
+          var ingnore_key_codes = [9, 13, 19, 20, 27, 32, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 106, 109, 110, 111, 186, 188, 189, 190, 191, 219, 220, 221, 222];
+          if ($.inArray(e.keyCode, ingnore_key_codes) >= 0) {
+            e.preventDefault();
+          }
+        });
+        $('.textkilo').keypress(function (e) {
+          var ingnore_key_codes = [9, 13, 19, 20, 27, 32, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 106, 109, 110, 111, 186, 188, 189, 190, 191, 219, 220, 221, 222];
+          if ($.inArray(e.keyCode, ingnore_key_codes) >= 0) {
+            e.preventDefault();
+          }
+        });
+
+      </script>
+      <br>
+
+
+      <!-- google places api set up-->
+      <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOfNTqW3XUOZwR6o9Uy2XyU9vGm8PnGbk&libraries=places&callback=initAutocomplete"
+        async defer>
+        </script>
+      <script>
+        let autocomplete;
+        function initAutocomplete() {
+          // avoiding form to trigger submit when inside the text input enter is pressed 
+          // $('.form-control').keydown(function (e) {
+          //   if (e.keyCode == 13) {
+          //     e.preventDefault();
+          //     return false;
+          //   }
+          // });
+
+          autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById("fullname1"),
+            {
+              types: ['establishment'],
+              componentRestrictions: { 'country': ['UZ'] },
+              fields: ['place_id', 'geometry', 'name']
+            }
+          );
+          // autocomplete.addListener('place_changed', onPlaceChanged);   
+          google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+              document.getElementById("lat1").value = "";
+              document.getElementById("lng1").value = "";
+              document.getElementById("name1").value = "";
+              document.getElementById("fullname1Copy").value = "";
+            }
+            else {
+              document.getElementById("lat1").value = place.geometry.location.lat();
+              document.getElementById("lng1").value = place.geometry.location.lng();
+              document.getElementById("name1").value = place.name;
+              document.getElementById("fullname1Copy").value = document.getElementById("fullname1").value;
+              calculateDelivaeryOntheFly();
+            }
+          });
+
+          // adding google maps autocomplete api to second form
+          autocomplete2 = new google.maps.places.Autocomplete(
+            document.getElementById("fullname2"),
+            {
+              types: ['establishment'],
+              componentRestrictions: { 'country': ['UZ'] },
+              fields: ['place_id', 'geometry', 'name']
+            }
+          );
+          // autocomplete.addListener('place_changed', onPlaceChanged);   
+          google.maps.event.addListener(autocomplete2, 'place_changed', function () {
+            var place = autocomplete2.getPlace();
+            if (!place.geometry) {
+              document.getElementById("lat2").value = "";
+              document.getElementById("lng2").value = "";
+              document.getElementById("name2").value = "";
+              document.getElementById("fullname2Copy").value = "";
+            }
+            else {
+              document.getElementById("lat2").value = place.geometry.location.lat();
+              document.getElementById("lng2").value = place.geometry.location.lng();
+              document.getElementById("name2").value = place.name;
+              document.getElementById("fullname2Copy").value = document.getElementById("fullname2").value;
+               calculateDelivaeryOntheFly();
+            }
+          });
+
+          let roundNumber3 = document.getElementsByClassName("roundNumber3");
+          let roundNumber4 = document.getElementsByClassName("roundNumber4");
+          // adding google maps autocomplete api to third form
+          if (roundNumber3.length === 1) {
+            // adding google maps autocomplete api to third form
+            autocomplete3 = new google.maps.places.Autocomplete(
+              document.getElementById("fullname3"),
+              {
+                types: ['establishment'],
+                componentRestrictions: { 'country': ['UZ'] },
+                fields: ['place_id', 'geometry', 'name']
+              }
+            );
+            // autocomplete.addListener('place_changed', onPlaceChanged);   
+            google.maps.event.addListener(autocomplete3, 'place_changed', function () {
+              var place = autocomplete3.getPlace();
+              if (!place.geometry) {
+                document.getElementById("lat3").value = "";
+                document.getElementById("lng3").value = "";
+                document.getElementById("name3").value = "";
+                document.getElementById("fullname3Copy").value = "";
+              }
+              else {
+                document.getElementById("lat3").value = place.geometry.location.lat();
+                document.getElementById("lng3").value = place.geometry.location.lng();
+                document.getElementById("name3").value = place.name;
+                document.getElementById("fullname3Copy").value = document.getElementById("fullname3").value;
+                calculateDelivaeryOntheFly();
+              }
+            });
+
+          }
+          // adding google maps autocomplete api to fourth form
+          if (roundNumber4.length === 1) {
+
+            autocomplete4 = new google.maps.places.Autocomplete(
+              document.getElementById("fullname4"),
+              {
+                types: ['establishment'],
+                componentRestrictions: { 'country': ['UZ'] },
+                fields: ['place_id', 'geometry', 'name']
+              }
+            );
+            // autocomplete.addListener('place_changed', onPlaceChanged);   
+            google.maps.event.addListener(autocomplete4, 'place_changed', function () {
+              var place = autocomplete4.getPlace();
+              if (!place.geometry) {
+                document.getElementById("lat4").value = "";
+                document.getElementById("lng4").value = "";
+                document.getElementById("name4").value = "";
+                document.getElementById("fullname4Copy").value = "";
+              }
+              else {
+                document.getElementById("lat4").value = place.geometry.location.lat();
+                document.getElementById("lng4").value = place.geometry.location.lng();
+                document.getElementById("name4").value = place.name;
+                document.getElementById("fullname4Copy").value = document.getElementById("fullname4").value;
+                calculateDelivaeryOntheFly();
+              }
+            });
+
+
+          }
+
+        }
+      </script>
+
+      <!-- form part -->
+      <div id="formdostavat">
+        <form action="" style="background-color: white;">
+          <br>
+          <span id="roundNumber" class="roundNumber1">1</span>
+          <span> Откуда * </span>
+          <br><br>
+          <div style="position: relative;">
+            <input autocomplete="off" type="text" value="<%=fullname1v%>" class="search_city"
+              placeholder="Сквер им. Амира Темура," id="fullname1">
+            <small class="AdressErr"> пожалуйста, нажмите на адрес,<span class="spantxt">рекомендованный
+                <span>Google</span></span></small>
+          </div>
+          <input autocomplete="off" type="text" value="<%=name1v%>" id="name1" style="display:none;">
+          <input autocomplete="off" type="text" value="<%=lat1v%>" id="lat1" style="display:none;">
+          <input autocomplete="off" type="text" value="<%=lng1v%>" id="lng1" style="display:none;">
+          <input autocomplete="off" type="text" value="<%=fullname1v%>" id="fullname1Copy" style="display: none;">
+          <!-- <input type="text" placeholder="Выберите адрес из меню" id="otkuda"> -->
+          <br><br>
+          <div style="position: relative; display: inline;">
+            <input type="tel" value="+998" id="telefonid1" maxlength="13" class="disablingText telefonClass">
+            <small class="telefonErr">номер телефона неверный или не введен </small>
+          </div>
+          <div id="floatedDatePickerDiv">
+            <select name="" id="datePicker"  class="datePickerClass1" onfocus='this.size=3;' onblur='this.size=1;'
+              onchange='this.size=1; this.blur();' value="">
+              <%let a=new Date();%>
+              <%let b=new Date();%>
+              <%let fullDate1; if(a.getMonth()<9){if(a.getDate()<10){fullDate1=a.getFullYear() + "-0" +eval("a.getMonth()+1")+"-0"+a.getDate();} else{fullDate1=a.getFullYear() + "-0" +eval("a.getMonth()+1")+"-"+a.getDate();}} else{if(a.getDate()<10){fullDate1=a.getFullYear() + "-" +eval("a.getMonth()+1")+"-0"+a.getDate();} else{fullDate1=a.getFullYear() + "-" +eval("a.getMonth()+1")+"-"+a.getDate();}}%>
+              <% b.setDate(1 + a.getDate());%>
+              <%let fullDate2; if(b.getMonth()<9){if(b.getDate()<10){fullDate2=b.getFullYear() + "-0" +eval("b.getMonth()+1")+"-0"+b.getDate();}else{fullDate2=b.getFullYear() + "-0" +eval("b.getMonth()+1")+"-"+b.getDate();}} else{if(b.getDate()<10){fullDate2=b.getFullYear() + "-" +eval("b.getMonth()+1")+"-0"+b.getDate();}else{fullDate2=b.getFullYear() + "-" +eval("b.getMonth()+1")+"-"+b.getDate();}}%>
+              <option value="<%=fullDate1%>">сегодня</option>
+              <option value="<%=fullDate2%>">завтра</option>
+              <% for(let i=2;i<=15;i++){ %>
+                <%let MonthofDays=["январь", "февраль" , "март" , "апреля" , "май" , "июнь" , "июль" , "август"
+                  , "сентябрь" , "октябрь" , "ноябрь" , "декабрь" ];%>
+                  <%let a=new Date(); %>
+                    <%let b=new Date();%>
+                      <% b.setDate(i + a.getDate());%>
+                      <% let fullDate; if(b.getMonth()<9){if(b.getDate()<10){fullDate=b.getFullYear() + "-0" +eval("b.getMonth()+1")+"-0"+b.getDate();} else{fullDate=b.getFullYear() + "-0" +eval("b.getMonth()+1")+"-"+b.getDate();}} else{if(b.getDate()<10){fullDate=b.getFullYear() + "-" +eval("b.getMonth()+1")+"-0"+b.getDate();} else{fullDate=b.getFullYear() + "-" +eval("b.getMonth()+1")+"-"+b.getDate();}}%>
+                      <option value="<%= fullDate %>">
+                          <%= b.getDate() + " " + MonthofDays[b.getMonth()]; %>
+                        </option>
+                        <% } %>
+            </select>
+            <div class="cLeft">
+              <span id="cId" style="padding-left:9px;padding-right:9px">с</span>
+              <select name="" id="timePickerFrom" class="timePickerFromClass1"  onfocus='this.size=3;' onblur='this.size=1;'
+                onchange='this.size=1; this.blur();'>
+                <option value="00:00">00:00</option>
+                <option value="01:00">01:00</option>
+                <option value="02:00">02:00</option>
+                <option value="03:00">03:00</option>
+                <option value="04:00">04:30</option>
+                <option value="05:00">05:00</option>
+                <option value="06:00">06:00</option>
+                <option value="07:00">07:00</option>
+                <option value="08:00">08:00</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
+                <option value="23:00">23:00</option>
+              </select>
+            </div>
+            <div class="doRight">
+              <span id="doId">до</span>
+              <select name="" id="timePickerTo" class="timePickerToClass1" onfocus='this.size=3;' onblur='this.size=1;'
+                onchange='this.size=1; this.blur();'>
+                <option value="00:00">00:00</option>
+                <option value="01:00">01:00</option>
+                <option value="02:00">02:00</option>
+                <option value="03:00">03:00</option>
+                <option value="04:30">04:00</option>
+                <option value="05:00">05:00</option>
+                <option value="06:00">06:00</option>
+                <option value="07:00">07:00</option>
+                <option value="08:00">08:00</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
+                <option value="23:00">23:00</option>
+              </select>
+            </div>
+          </div>
+          <br> <br> <br>
+          <textarea name="" id="otkuda" class="otkuda1" cols="10" rows="3" placeholder="Комментарий не обязательно"></textarea>
+
+          <!--Date field  -->
+
+          <!-- initializing -->
+        </form>
+
+
+      </div>
+      <div id="formdostavat" style="margin-top: 50px; " class="input_fields_wrap">
+
+        <form action="" style=" background-color: white">
+          <br>
+          <div id="roundNumber" class="roundNumber2">2</div>
+          <span> Kуда *</span>
+          <br><br>
+          <div style="position:relative;">
+            <input autocomplete="off" type="text" value="<%=fullname2v%>" class="search_city"
+              placeholder="Анор, улица Мирабад, Ташкент, Узбекистан" id="fullname2">
+            <small class="AdressErr"> пожалуйста, нажмите на адрес, рекомендованный Google </small>
+          </div>
+          <input autocomplete="off" type="text" value="<%=name2v%>" id="name2" style="display: none;">
+          <input autocomplete="off" type="text" value="<%=lat2v%>" id="lat2" style="display: none;">
+          <input autocomplete="off" type="text" value="<%=lng2v%>" id="lng2" style="display: none;">
+          <input autocomplete="off" type="text" value="<%=clickedBtnName%>" id="clickedBtnName" style="display: none;">
+          <input autocomplete="off" type="text" value="<%=fullname2v%>" id="fullname2Copy" style="display: none;">
+          <!-- <input type="text" placeholder="Выберите адрес из меню" id="otkuda"> -->
+          <br><br>
+          <div style="position: relative; display:inline;">
+            <input type="tel" value="+998" id="telefonid2" maxlength="13" class="disablingText telefonClass">
+            <small class="telefonErr">номер телефона неверный или не введен </small>
+          </div>
+          <div id="floatedDatePickerDiv">
+            <select name="" id="datePicker" onfocus='this.size=3;' onblur='this.size=1;'
+              onchange='this.size=1; this.blur();' value="" class="datePickerClass2">
+              <%a=new Date();%>
+              <%b=new Date();%>
+              <%if(a.getMonth()<9){if(a.getDate()<10){fullDate1=a.getFullYear() + "-0" +eval("a.getMonth()+1")+"-0"+a.getDate();} else{fullDate1=a.getFullYear() + "-0" +eval("a.getMonth()+1")+"-"+a.getDate();}} else{if(a.getDate()<10){fullDate1=a.getFullYear() + "-" +eval("a.getMonth()+1")+"-0"+a.getDate();} else{fullDate1=a.getFullYear() + "-" +eval("a.getMonth()+1")+"-"+a.getDate();}}%>
+              <%b.setDate(1 + a.getDate());%>
+              <%if(b.getMonth()<9){if(b.getDate()<10){fullDate2=b.getFullYear() + "-0" +eval("b.getMonth()+1")+"-0"+b.getDate();}else{fullDate2=b.getFullYear() + "-0" +eval("b.getMonth()+1")+"-"+b.getDate();}} else{if(b.getDate()<10){fullDate2=b.getFullYear() + "-" +eval("b.getMonth()+1")+"-0"+b.getDate();}else{fullDate2=b.getFullYear() + "-" +eval("b.getMonth()+1")+"-"+b.getDate();}}%>
+              <option value="<%=fullDate1%>">сегодня</option>
+              <option value="<%=fullDate2%>">завтра</option>
+              <% for(let i=2;i<=15;i++){ %>
+                <%let MonthofDays=["январь", "февраль" , "март" , "апреля" , "май" , "июнь" , "июль" , "август"
+                  , "сентябрь" , "октябрь" , "ноябрь" , "декабрь" ];%>
+                  <%let a=new Date(); %>
+                    <%let b=new Date();%>
+                      <% b.setDate(i + a.getDate());%>
+                      <% let fullDate; if(b.getMonth()<9){if(b.getDate()<10){fullDate=b.getFullYear() + "-0" +eval("b.getMonth()+1")+"-0"+b.getDate();} else{fullDate=b.getFullYear() + "-0" +eval("b.getMonth()+1")+"-"+b.getDate();}} else{if(b.getDate()<10){fullDate=b.getFullYear() + "-" +eval("b.getMonth()+1")+"-0"+b.getDate();} else{fullDate=b.getFullYear() + "-" +eval("b.getMonth()+1")+"-"+b.getDate();}}%>
+                      <option value="<%= fullDate %>">
+                          <%= b.getDate() + " " + MonthofDays[b.getMonth()]; %>
+                        </option>
+                        <% } %>
+            </select>
+            <script>
+              $('.disablingText').keydown(function (e) {
+                var ingnore_key_codes = [9, 13, 19, 20, 27, 32, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 106, 109, 110, 111, 186, 188, 189, 190, 191, 219, 220, 221, 222];
+                if ($.inArray(e.keyCode, ingnore_key_codes) >= 0) {
+                  e.preventDefault();
+                }
+              });
+              $('.disablingText').keypress(function (e) {
+                var ingnore_key_codes = [9, 13, 19, 20, 27, 32, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 106, 109, 110, 111, 186, 188, 189, 190, 191, 219, 220, 221, 222];
+                if ($.inArray(e.keyCode, ingnore_key_codes) >= 0) {
+                  e.preventDefault();
+                }
+              });
+            </script>
+            <div class="cLeft">
+              <span id="cId" style="padding-left:9px;padding-right:9px">с</span>
+              <select name="" id="timePickerFrom" class="timePickerFromClass2" onfocus='this.size=3;' onblur='this.size=1;'
+                onchange='this.size=1; this.blur();'>
+                <option value="00:00">00:00</option>
+                <option value="01:00">01:00</option>
+                <option value="02:00">02:00</option>
+                <option value="03:00">03:00</option>
+                <option value="04:30">04:00</option>
+                <option value="05:00">05:00</option>
+                <option value="06:00">06:00</option>
+                <option value="07:00">07:00</option>
+                <option value="08:00">08:00</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
+                <option value="23:00">23:00</option>
+              </select>
+            </div>
+            <div class="doRight">
+              <span id="doId">до</span>
+              <select name="" id="timePickerTo" class="timePickerToClass2" onfocus='this.size=3;' onblur='this.size=1;'
+                onchange='this.size=1; this.blur();'>
+                <option value="00:00">00:00</option>
+                <option value="01:00">01:00</option>
+                <option value="02:00">02:00</option>
+                <option value="03:00">03:00</option>
+                <option value="04:30">04:00</option>
+                <option value="05:00">05:00</option>
+                <option value="06:00">06:00</option>
+                <option value="07:00">07:00</option>
+                <option value="08:00">08:00</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
+                <option value="23:00">23:00</option>
+              </select>
+            </div>
+          </div>
+          <br> <br>
+          <textarea name="" id="otkuda" class="otkuda2" cols="10" rows="3" placeholder="Комментарий не обязательно"></textarea>
+        </form>
+
+      </div>
+      <button type="submit" class="btn btn-danger add_field_button" style="margin-top: 15px;" id="button1" name="button"
+        value="1">+ Добавить адрес</button>
+      <br><br>
+      <div style="position: relative; display:inline;">
+        <input type="text" placeholder="Что взять? например:(документ, товар...............)" id="chtoVzyat"
+          class="chtoVzyatClass">
+        <small class="vesgruzovoyErrorMsg" style="position: absolute;top: 30px;">Не может быть пустым</small>
+      </div>
+      <div id="raschitat">
+        <h1 style="font-size: 20px;">Итого:<span style="font-weight: normal;" id="price"> от 10 000 UZS</span> </h1>
+        <button onclick="otpravitZakas()" type="submit" class="btn btn-danger "
+          style="margin-top: 15px; width: 50%; border-radius: 16px;" id="zakasSender" name="button">Отправить
+          заказ</button>
+      </div>
+
+      <br><br>
+    </div>
+
+  </div>
+
+  <!-- <p style="display: flex; justify-content: center">
+        Отправим к вам ближайшего курьера
+      </p> -->
+
+  <!-- <button style="background-color: white; border-color:rgb(255, 62, 128); border-width:1px; ;">peshkom</button>
+         <button name="transport_type" value="gruzovoy">avto</button>
+         <button>guzovoy</button>
+          <button type="submit" name="transport_type" value="gruzovoy">submit</button> -->
+
+  <script>
+    // declaring variables for  creating order
+    var delivery_method;
+    var transport_type = "light-1";
+    var weight;
+    var object;
+    var note;
+    var adress = [];
+    var contact_phone = [];
+    var contact_person = [];
+    var internal_number = [];
+    var delivery_time = [];
+
+
+    const instance = axios.create({
+      withCredentials: true,
+    });
+    const peshkombtn = document.getElementById("peshkom");
+    const legavtobtn = document.getElementById("legavto");
+    const gruzovoybtn = document.getElementById("gruzovoy");
+    const vesbtnW1 = document.getElementById("w-1");
+    const vesbtnW2 = document.getElementById("w-2");
+    const vesbtnW3 = document.getElementById("w-3");
+    const vesbtnW4 = document.getElementById("w-4");
+    const jip1btn = document.getElementById("jip1");
+    const kabluk2btn = document.getElementById("kabluk2");
+    const porter3btn = document.getElementById("porter3");
+    const gazel4btn = document.getElementById("gazel4");
+    const btns = [peshkombtn, legavtobtn, gruzovoybtn, vesbtnW1, vesbtnW2,
+      vesbtnW3, vesbtnW4, jip1btn, kabluk2btn, porter3btn, gazel4btn];
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].style.cursor = "context-menu";
+    }
+
+
+
+    const sendDataPeshkom = function () {
+      if (peshkombtn.style.border === "1px solid rgb(255, 62, 128)") {
+        peshkombtn.style.cursor = "context-menu";
+        peshkombtn.style.border = "1px solid  rgb(255, 62, 128)"
+        peshkombtn.style.color = "rgb(255, 62, 128)";
+        delivery_method = 0;
+      }
+      else {
+        document.getElementById("vesposilka").style.display = "flex";
+        peshkombtn.style.cursor = "pointer";
+        peshkombtn.style.border = "1px solid  rgb(255, 62, 128)";
+        peshkombtn.style.color = "rgb(255, 62, 128)";
+        legavtobtn.style.border = "1px solid #d5d4d4";
+        legavtobtn.style.color = "black";
+        gruzovoybtn.style.border = "1px solid #d5d4d4";
+        gruzovoybtn.style.color = "black";
+        document.getElementById("w-1").innerHTML = "до 1 кг";
+        document.getElementById("w-2").innerHTML = "до 5 кг";
+        document.getElementById("w-3").innerHTML = "до 10 кг";
+        document.getElementById("w-4").innerHTML = "до 15 кг";
+        document.getElementById("gruzovoyDiv").style.display = "none";
+        document.getElementById("vesposilkaTxt").style.display = "block";
+        document.getElementById("gruzovoyVes").style.display = "none";
+        vesbtnW1.click();
+        delivery_method = 0;
+        // axios
+        //   .post("https://jsonplaceholder.typicode.com/todos", {
+        //     title: "New Todo",
+        //     completed: false,
+        //   })
+        //   .then((res) => showOutput(res))
+        //   .catch((err) => console.error(err));
+
+        // axios({
+        //   method: "post",
+        //   headers: { "content-type": "application/json" },
+        //   url: "http://emu.invan.uz/user/sign-up/start",
+        //   data: {
+        //     phone: "901166699",
+        //     region: "Chilonzor",
+        //     name: "Ivan1",
+        //     type: "individual",
+        //   },
+        // });
+        // $.ajax({
+        //     type: "POST",
+        //     url: "http://95.217.183.114/user/sign-up/start",
+        //     headers: { "Content-Type": "application/json" },
+        //     contentType: "application/json;",
+        //     data: {
+        //         name: "Ivan",
+        //         phone: "998609712",
+        //         region: "Chilonzor",
+        //         type: "individual",
+        //     },
+        //     dataType: "json",
+        //     success: function (response) {
+        //         console.log("suceess");
+        //     },
+        // });
+      }
+
+      calculateDelivaeryOntheFly()
+    }
+
+    // detecting which button will be shown as clicked for default page loading  
+
+    const body = document.body;
+    body.onload = myFunction;
+    function myFunction() {
+      let clickedBtnValueFromHomePage = document.getElementById("clickedBtnName");
+      if (clickedBtnValueFromHomePage.value === "") {
+        peshkombtn.click();
+        vesbtnW1.click();
+      }
+      else {
+        if (clickedBtnValueFromHomePage.value === "peshkom") {
+          peshkombtn.click();
+          vesbtnW1.click();
+        }
+        else if (clickedBtnValueFromHomePage.value === "avtomobil") {
+          legavtobtn.click();
+          vesbtnW1.click();
+        }
+        else if (clickedBtnValueFromHomePage.value === "gruzovoy") {
+          gruzovoybtn.click();
+          jip1btn.click();
+        }
+      }
+
+    }
+
+    const sendDataLegavto = function () {
+      if (legavtobtn.style.border === "1px solid rgb(255, 62, 128)") {
+        legavtobtn.style.cursor = "context-menu";
+        delivery_method = 1;
+      }
+      else {
+        document.getElementById("vesposilka").style.display = "flex";
+        legavtobtn.style.border = "1px solid  rgb(255, 62, 128)"
+        legavtobtn.style.color = "rgb(255, 62, 128)";
+        peshkombtn.style.border = "1px solid #d5d4d4";
+        peshkombtn.style.color = "black";
+        gruzovoybtn.style.border = "1px solid #d5d4d4";
+        gruzovoybtn.style.color = "black";
+        legavtobtn.style.cursor = "pointer";
+        document.getElementById("w-1").innerHTML = "до 50 кг";
+        document.getElementById("w-2").innerHTML = "до 100 кг";
+        document.getElementById("w-3").innerHTML = "до 150 кг";
+        document.getElementById("w-4").innerHTML = "до 200 кг";
+        document.getElementById("gruzovoyDiv").style.display = "none";
+        document.getElementById("vesposilkaTxt").style.display = "block";
+        document.getElementById("gruzovoyVes").style.display = "none";
+        vesbtnW1.click();
+        delivery_method = 1;
+      }
+      calculateDelivaeryOntheFly();
+    }
+
+    const sendDataGruzavoy = function () {
+      if (gruzovoybtn.style.border === "1px solid rgb(255, 62, 128)") {
+        gruzovoybtn.style.cursor = "context-menu";
+        jip1btn.click();
+        delivery_method = 2;
+      }
+      else {
+        document.getElementById("vesposilka").style.display = "none";
+        gruzovoybtn.style.border = "1px solid rgb(255, 62, 128)";
+        gruzovoybtn.style.color = "rgb(255, 62, 128)";
+        peshkombtn.style.border = "1px solid #d5d4d4";
+        peshkombtn.style.color = "black";
+        legavtobtn.style.border = "1px solid #d5d4d4";
+        legavtobtn.style.color = "black";
+        gruzovoybtn.style.cursor = "pointer";
+        document.getElementById("gruzovoyDiv").style.display = "flex";
+        document.getElementById("vesposilkaTxt").style.display = "none";
+        document.getElementById("gruzovoyVes").style.display = "block";
+        jip1btn.click();
+        delivery_method = 2;
+      }
+      calculateDelivaeryOntheFly();
+    }
+    //  send data vesbtns
+    const sendDatavesbtnW1 = function () {
+      if (vesbtnW1.style.border === "1px solid rgb(255, 62, 128)") {
+        vesbtnW1.style.cursor = "context-menu";
+        if (vesbtnW1.innerHTML === "до 1 кг") {
+          weight = 1;
+        }
+        else if (vesbtnW1.innerHTML === "до 50 кг") {
+          weight = 50;
+        }
+      }
+      else {
+        vesbtnW1.style.border = "1px solid rgb(255, 62, 128)";
+        vesbtnW1.style.color = "rgb(255, 62, 128)";
+        vesbtnW1.style.cursor = "pointer";
+        vesbtnW2.style.border = "1px solid #d5d4d4";
+        vesbtnW2.style.color = "black";
+        vesbtnW3.style.border = "1px solid #d5d4d4";
+        vesbtnW3.style.color = "black";
+        vesbtnW4.style.border = "1px solid #d5d4d4";
+        vesbtnW4.style.color = "black";
+        if (vesbtnW1.innerHTML === "до 1 кг") {
+          weight = 1;
+        }
+        else if (vesbtnW1.innerHTML === "до 50 кг") {
+          weight = 50;
+        }
+      }
+      calculateDelivaeryOntheFly();
+    }
+
+    const sendDatavesbtnW2 = function () {
+      if (vesbtnW2.style.border === "1px solid rgb(255, 62, 128)") {
+        vesbtnW2.style.cursor = "context-menu";
+        if (vesbtnW2.innerHTML === "до 5 кг") {
+          weight = 5;
+        }
+        else if (vesbtnW2.innerHTML === "до 100 кг") {
+          weight = 100;
+        }
+      }
+      else {
+        vesbtnW2.style.border = "1px solid rgb(255, 62, 128)";
+        vesbtnW2.style.color = "rgb(255, 62, 128)";
+        vesbtnW2.style.cursor = "pointer";
+        vesbtnW1.style.border = "1px solid #d5d4d4";
+        vesbtnW1.style.color = "black";
+        vesbtnW3.style.border = "1px solid #d5d4d4";
+        vesbtnW3.style.color = "black";
+        vesbtnW4.style.border = "1px solid #d5d4d4";
+        vesbtnW4.style.color = "black";
+        if (vesbtnW2.innerHTML === "до 5 кг") {
+          weight = 5;
+        }
+        else if (vesbtnW2.innerHTML === "до 100 кг") {
+          weight = 100;
+        }
+      }
+      calculateDelivaeryOntheFly();
+    }
+
+    const sendDatavesbtnW3 = function () {
+      if (vesbtnW3.style.border === "1px solid rgb(255, 62, 128)") {
+        vesbtnW3.style.cursor = "context-menu";
+        if (vesbtnW3.innerHTML === "до 10 кг") {
+          weight = 10;
+        }
+        else if (vesbtnW3.innerHTML === "до 150 кг") {
+          weight = 150;
+        }
+      }
+      else {
+        vesbtnW3.style.border = "1px solid rgb(255, 62, 128)";
+        vesbtnW3.style.color = "rgb(255, 62, 128)";
+        vesbtnW3.style.cursor = "pointer";
+        vesbtnW1.style.border = "1px solid #d5d4d4";
+        vesbtnW1.style.color = "black";
+        vesbtnW2.style.border = "1px solid #d5d4d4";
+        vesbtnW2.style.color = "black";
+        vesbtnW4.style.border = "1px solid #d5d4d4";
+        vesbtnW4.style.color = "black";
+        if (vesbtnW3.innerHTML === "до 10 кг") {
+          weight = 10;
+        }
+        else if (vesbtnW3.innerHTML === "до 150 кг") {
+          weight = 150;
+        }
+      }
+      calculateDelivaeryOntheFly();
+    }
+
+    const sendDatavesbtnW4 = function () {
+      if (vesbtnW4.style.border === "1px solid rgb(255, 62, 128)") {
+        vesbtnW4.style.cursor = "context-menu";
+
+        if (vesbtnW4.innerHTML === "до 15 кг") {
+          weight = 15;
+        }
+        else if (vesbtnW4.innerHTML === "до 200 кг") {
+          weight = 200;
+        }
+      }
+      else {
+        vesbtnW4.style.border = "1px solid rgb(255, 62, 128)";
+        vesbtnW4.style.color = "rgb(255, 62, 128)";
+        vesbtnW4.style.cursor = "pointer";
+        vesbtnW1.style.border = "1px solid #d5d4d4";
+        vesbtnW1.style.color = "black";
+        vesbtnW2.style.border = "1px solid #d5d4d4";
+        vesbtnW2.style.color = "black";
+        vesbtnW3.style.border = "1px solid #d5d4d4";
+        vesbtnW3.style.color = "black";
+
+        if (vesbtnW4.innerHTML === "до 15 кг") {
+          weight = 15;
+        }
+        else if (vesbtnW4.innerHTML === "до 200 кг") {
+          weight = 200;
+        }
+
+      }
+      calculateDelivaeryOntheFly();
+    }
+
+    const sendDatajip1btn = function () {
+      if (jip1btn.style.border === "1px solid rgb(255, 62, 128)") {
+        jip1btn.style.cursor = "context-menu";
+      }
+      else {
+        jip1btn.style.border = "1px solid rgb(255, 62, 128)";
+        jip1btn.style.color = "rgb(255, 62, 128)";
+        jip1btn.style.cursor = "pointer";
+        kabluk2btn.style.border = "1px solid #d5d4d4";
+        kabluk2btn.style.color = "black";
+        porter3btn.style.border = "1px solid #d5d4d4";
+        porter3btn.style.color = "black";
+        gazel4btn.style.border = "1px solid #d5d4d4";
+        gazel4btn.style.color = "black";
+      }
+      calculateDelivaeryOntheFly();
+    }
+
+    const sendDatakabluk2btn = function () {
+      if (kabluk2btn.style.border === "1px solid rgb(255, 62, 128)") {
+        kabluk2btn.style.cursor = "context-menu";
+      }
+      else {
+        kabluk2btn.style.border = "1px solid rgb(255, 62, 128)";
+        kabluk2btn.style.color = "rgb(255, 62, 128)";
+        kabluk2btn.style.cursor = "pointer";
+        jip1btn.style.border = "1px solid #d5d4d4";
+        jip1btn.style.color = "black";
+        porter3btn.style.border = "1px solid #d5d4d4";
+        porter3btn.style.color = "black";
+        gazel4btn.style.border = "1px solid #d5d4d4";
+        gazel4btn.style.color = "black";
+      }
+    }
+
+    const sendDataporter3btn = function () {
+      if (porter3btn.style.border === "1px solid rgb(255, 62, 128)") {
+        porter3btn.style.cursor = "context-menu";
+      }
+      else {
+        porter3btn.style.border = "1px solid rgb(255, 62, 128)";
+        porter3btn.style.color = "rgb(255, 62, 128)";
+        porter3btn.style.cursor = "pointer";
+        gazel4btn.style.border = "1px solid #d5d4d4";
+        gazel4btn.style.color = "black";
+        kabluk2btn.style.border = "1px solid #d5d4d4";
+        kabluk2btn.style.color = "black";
+        jip1btn.style.border = "1px solid #d5d4d4";
+        jip1btn.style.color = "black";
+      }
+
+    }
+
+    const sendDatavegazel4btn = function () {
+
+
+      if (gazel4btn.style.border === "1px solid rgb(255, 62, 128)") {
+        gazel4btn.style.cursor = "context-menu";
+      }
+      else {
+        gazel4btn.style.border = "1px solid rgb(255, 62, 128)";
+        gazel4btn.style.color = "rgb(255, 62, 128)";
+        gazel4btn.style.cursor = "pointer";
+        jip1btn.style.border = "1px solid #d5d4d4";
+        jip1btn.style.color = "black";
+        kabluk2btn.style.border = "1px solid #d5d4d4";
+        kabluk2btn.style.color = "black";
+        porter3btn.style.border = "1px solid #d5d4d4";
+        porter3btn.style.color = "black";
+      }
+
+    }
+
+
+    peshkombtn.addEventListener("click", sendDataPeshkom);
+    legavtobtn.addEventListener("click", sendDataLegavto);
+    gruzovoybtn.addEventListener("click", sendDataGruzavoy);
+    vesbtnW1.addEventListener("click", sendDatavesbtnW1);
+    vesbtnW2.addEventListener("click", sendDatavesbtnW2);
+    vesbtnW3.addEventListener("click", sendDatavesbtnW3);
+    vesbtnW4.addEventListener("click", sendDatavesbtnW4);
+    jip1btn.addEventListener("click", sendDatajip1btn);
+    kabluk2btn.addEventListener("click", sendDatakabluk2btn);
+    porter3btn.addEventListener("click", sendDataporter3btn);
+    gazel4btn.addEventListener("click", sendDatavegazel4btn);
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      var x = 3; //initlal text box counts
+      var max_fields = 5; //maximum input boxes allowed
+      var wrapper = $(".input_fields_wrap"); //Fields wrapper
+      var add_button = $(".add_field_button"); //Add button ID
+      $(add_button).click(function (e) { //on add input button click
+        var appendedTxt = `
+    <form action="" style="margin-top: 50px; background-color:white" class="removeME">    
+      <br>
+      <span id="roundNumber" class="roundNumber`+ x + `">` + x + `</span> 
+      <span> Kуда *</span> 
+        <label style="float: right;margin-right: 10px;" id="sendX" class="remove_field">&#10006</label>
+       <br><br>
+       <div style = "position:relative">
+       <input autocomplete="off" type="text" value="" class="search_city" placeholder="Сквер им. Амира Темура,"
+            id="fullname`+ x + `">
+       <small class="AdressErr"> пожалуйста, нажмите на адрес, рекомендованный Google </small>
+       <div>
+          <input autocomplete="off" type="text" value="" id="name`+ x + `" style="display: none;">
+          <input autocomplete="off" type="text" value="" id="lat`+ x + `" style="display: none;">
+          <input autocomplete="off" type="text" value="" id="lng`+ x + `" style="display: none;">
+          <input autocomplete="off" type="text" value="" id="fullname`+ x + `Copy" style="display:none">
+
+       <br> <br>
+       <div style="position: relative; display:inline;">
+       <input type="tel" value="+998" id="telefonid`+ x + `" maxlength="13" class="disablingText telefonClass">
+       <small class="telefonErr">номер телефона неверный или не введен </small>
+       </div>
+       <div id="floatedDatePickerDiv">
+        <select name="" id="datePicker" onfocus='this.size=3;' onblur='this.size=1;'
+              onchange='this.size=1; this.blur();' value="" class="datePickerClass`+x+`">
+              <%a=new Date();%>
+              <%b=new Date();%>
+              <%if(a.getMonth()<9){if(a.getDate()<10){fullDate1=a.getFullYear() + "-0" +eval("a.getMonth()+1")+"-0"+a.getDate();} else{fullDate1=a.getFullYear() + "-0" +eval("a.getMonth()+1")+"-"+a.getDate();}} else{if(a.getDate()<10){fullDate1=a.getFullYear() + "-" +eval("a.getMonth()+1")+"-0"+a.getDate();} else{fullDate1=a.getFullYear() + "-" +eval("a.getMonth()+1")+"-"+a.getDate();}}%>
+              <%b.setDate(1 + a.getDate());%>
+              <%if(b.getMonth()<9){if(b.getDate()<10){fullDate2=b.getFullYear() + "-0" +eval("b.getMonth()+1")+"-0"+b.getDate();}else{fullDate2=b.getFullYear() + "-0" +eval("b.getMonth()+1")+"-"+b.getDate();}} else{if(b.getDate()<10){fullDate2=b.getFullYear() + "-" +eval("b.getMonth()+1")+"-0"+b.getDate();}else{fullDate2=b.getFullYear() + "-" +eval("b.getMonth()+1")+"-"+b.getDate();}}%>
+              <option value="<%=fullDate1%>">сегодня</option>
+              <option value="<%=fullDate2%>">завтра</option>
+              <% for(let i=2;i<=15;i++){ %>
+                <%let MonthofDays=["январь", "февраль" , "март" , "апреля" , "май" , "июнь" , "июль" , "август"
+                  , "сентябрь" , "октябрь" , "ноябрь" , "декабрь" ];%>
+                  <%let a=new Date(); %>
+                    <%let b=new Date();%>
+                      <% b.setDate(i + a.getDate());%>
+                      <% let fullDate; if(b.getMonth()<9){if(b.getDate()<10){fullDate=b.getFullYear() + "-0" +eval("b.getMonth()+1")+"-0"+b.getDate();} else{fullDate=b.getFullYear() + "-0" +eval("b.getMonth()+1")+"-"+b.getDate();}} else{if(b.getDate()<10){fullDate=b.getFullYear() + "-" +eval("b.getMonth()+1")+"-0"+b.getDate();} else{fullDate=b.getFullYear() + "-" +eval("b.getMonth()+1")+"-"+b.getDate();}}%>
+                      <option value="<%= fullDate %>">
+                          <%= b.getDate() + " " + MonthofDays[b.getMonth()]; %>
+                        </option>
+                        <% } %>
+            </select>
+    <div class="cLeft">  
+       <span id="cId" style="padding-left:9px;padding-right:9px">с</span>
+       <select name="" id="timePickerFrom" class="timePickerFromClass`+x+`" onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+          <option value="00:00">00:00</option>
+          <option value="01:00">01:00</option>
+          <option value="02:00">02:00</option>
+          <option value="03:00">03:00</option>
+          <option value="04:00">04:00</option>
+          <option value="05:00">05:00</option>
+          <option value="06:00">06:00</option>
+          <option value="07:00">07:00</option>
+          <option value="08:00">08:00</option>
+          <option value="09:00">09:00</option>
+          <option value="10:00">10:00</option>
+          <option value="11:00">11:00</option>
+          <option value="12:00">12:00</option>
+          <option value="13:00">13:00</option>
+          <option value="14:00">14:00</option>
+          <option value="15:00">15:00</option>
+          <option value="16:00">16:00</option>
+          <option value="17:00">17:00</option>
+          <option value="18:00">18:00</option>
+          <option value="19:00">19:00</option>
+          <option value="20:00">20:00</option>
+          <option value="21:00">21:00</option>
+          <option value="22:00">22:00</option>
+          <option value="23:00">23:00</option>
+         </select>
+     </div>
+       <div class="doRight">        
+        <span id="doId">до</span>
+          <select name="" id="timePickerTo" class="timePickerToClass`+x+`"  onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+            <option value="00:00">00:00</option>
+            <option value="01:00">01:00</option>
+          <option value="02:00">02:00</option>
+          <option value="03:00">03:00</option>
+          <option value="04:30">04:00</option>
+          <option value="05:00">05:00</option>
+          <option value="06:00">06:00</option>
+          <option value="07:00">07:00</option>
+          <option value="08:00">08:00</option>
+          <option value="09:00">09:00</option>
+          <option value="10:00">10:00</option>
+          <option value="11:00">11:00</option>
+          <option value="12:00">12:00</option>
+          <option value="13:00">13:00</option>
+          <option value="14:00">14:00</option>
+          <option value="15:00">15:00</option>
+          <option value="16:00">16:00</option>
+          <option value="17:00">17:00</option>
+          <option value="18:00">18:00</option>
+          <option value="19:00">19:00</option>
+          <option value="20:00">20:00</option>
+          <option value="21:00">21:00</option>
+          <option value="22:00">22:00</option>
+          <option value="23:00">23:00</option>
+          </select>
+       </div>
+      </div>
+       <br> <br>
+       <textarea name="" id="otkuda" class="otkuda`+x+`" cols="10" rows="3" placeholder="Комментарий не обязательно"></textarea>
+    </form>
+  `;
+        e.preventDefault();
+        if (x < max_fields) { //max input box allowed
+
+          //text box increment
+          $(wrapper).append(appendedTxt); //add input box
+          x++;
+        }
+        // disabling characters in phone number input
+
+        $('.disablingText').keydown(function (e) {
+          var ingnore_key_codes = [9, 13, 19, 20, 27, 32, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 106, 109, 110, 111, 186, 188, 189, 190, 191, 219, 220, 221, 222];
+          if ($.inArray(e.keyCode, ingnore_key_codes) >= 0) {
+            e.preventDefault();
+          }
+        });
+        $('.disablingText').keypress(function (e) {
+          var ingnore_key_codes = [9, 13, 19, 20, 27, 32, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 106, 109, 110, 111, 186, 188, 189, 190, 191, 219, 220, 221, 222];
+          if ($.inArray(e.keyCode, ingnore_key_codes) >= 0) {
+            e.preventDefault();
+          }
+        });
+        // calling auto complete google maps js api in order to add this api to 3rd and 4th inputs
+        initAutocomplete();
+
+
+      });
+
+      $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+        e.preventDefault();
+        $(this).parent('.removeME').remove();
+        x--;
+        calculateDelivaeryOntheFly();  
+      })
+    });
+
+  </script>
+
+  <!-- sending order -->
+  <script>
+    function otpravitZakas() {
+
+      //  weight error message part
+
+      if ($("#gruzovoyVes").css("display") !== "none") {
+
+        if ($(".textkilo").val() === "") {
+          $(".textkilo").addClass("errorMsg");
+          //          $([document.documentElement, document.body]).animate({
+          //     scrollTop: $(".textkilo:first").offset().top
+          // }, 1000); 
+        }
+        else {
+          weight = document.getElementById("focusme").value;
+        }
+
+
+        document.getElementById("focusme").oninput = function () {
+          if ($(".textkilo").val() !== "") {
+            if ($(".textkilo").hasClass("errorMsg")) {
+              $(".textkilo").removeClass("errorMsg");
+            }
+          }
+          else {
+            $(".textkilo").addClass("errorMsg");
+          }
+        };
+
+      }
+
+      // phone number error message checking part
+
+    var phoneClassnamesOb = document.getElementsByClassName("telefonClass");
+    if($("#telefonid1").val().length !== 9 && $("#telefonid1").val().length !== 13) {
+          $("#telefonid1").addClass("errorMsg");
+        }
+    if ($("#telefonid2").val().length !== 9 && $("#telefonid2").val().length !== 13) {
+          $("#telefonid2").addClass("errorMsg");
+      }
+     if(phoneClassnamesOb.length === 3 && $("#telefonid3").length===1){
+        if ($("#telefonid3").val().length !== 9 && $("#telefonid3").val().length !== 13) {
+            $("#telefonid3").addClass("errorMsg");
+        }  
+      }
+      if(phoneClassnamesOb.length === 3 && $("#telefonid4").length===1){
+        if ($("#telefonid4").val().length !== 9 && $("#telefonid4").val().length !== 13) {
+            $("#telefonid4").addClass("errorMsg");
+        }  
+      }
+    if(phoneClassnamesOb.length === 4){
+       if ($("#telefonid4").val().length !== 9 && $("#telefonid4").val().length !== 13) {
+           $("#telefonid4").addClass("errorMsg");
+       }
+       if ($("#telefonid3").val().length !== 9 && $("#telefonid3").val().length !== 13) {
+           $("#telefonid3").addClass("errorMsg");
+       }
+    }
+      for (let i = 0; i < phoneClassnamesOb.length; i++) {
+
+      
+        if (i === 0) {
+          document.getElementById("telefonid1").oninput = function () {
+
+            let telephoneNumb = [];
+            telephoneNumb = $("#telefonid1").val();
+
+            if (telephoneNumb[0] === "+") {
+              if ($("#telefonid1").val().length === 13) {
+                $("#telefonid1").removeClass("errorMsg");
+              }
+              else {
+                $("#telefonid1").addClass("errorMsg");
+              }
+            }
+
+            if (telephoneNumb[0] !== "+") {
+              if ($("#telefonid1").val().length === 9) {
+                $("#telefonid1").removeClass("errorMsg");
+              }
+              else {
+                $("#telefonid1").addClass("errorMsg");
+              }
+            }
+
+          }
+        }
+        if (i === 1) {
+          document.getElementById("telefonid2").oninput = function () {
+
+            let telephoneNumb = [];
+            telephoneNumb = $("#telefonid2").val();
+
+            if (telephoneNumb[0] === "+") {
+              if ($("#telefonid2").val().length === 13) {
+                $("#telefonid2").removeClass("errorMsg");
+              }
+              else {
+                $("#telefonid2").addClass("errorMsg");
+              }
+            }
+
+            if (telephoneNumb[0] !== "+") {
+              if ($("#telefonid2").val().length === 9) {
+                $("#telefonid2").removeClass("errorMsg");
+              }
+              else {
+                $("#telefonid2").addClass("errorMsg");
+              }
+            }
+
+          }
+
+        }
+
+        if (i === 2 && $("#telefonid3").length===1) {
+
+          document.getElementById("telefonid3").oninput = function () {
+
+            let telephoneNumb = [];
+            telephoneNumb = $("#telefonid3").val();
+
+            if (telephoneNumb[0] === "+") {
+              if ($("#telefonid3").val().length === 13) {
+                $("#telefonid3").removeClass("errorMsg");
+              }
+              else {
+                $("#telefonid3").addClass("errorMsg");
+              }
+            }
+
+            if (telephoneNumb[0] !== "+") {
+              if ($("#telefonid3").val().length === 9) {
+                $("#telefonid3").removeClass("errorMsg");
+              }
+              else {
+                $("#telefonid3").addClass("errorMsg");
+              }
+            }
+
+          }
+
+        }
+        if (i === 2 && $("#telefonid4").length===1) {
+
+          document.getElementById("telefonid4").oninput = function () {
+
+          let telephoneNumb = [];
+          telephoneNumb = $("#telefonid4").val();
+
+          if (telephoneNumb[0] === "+") {
+               if ($("#telefonid4").val().length === 13) {
+               $("#telefonid4").removeClass("errorMsg");
+           }
+          else {
+                     $("#telefonid4").addClass("errorMsg");
+            }
+        }
+
+        if (telephoneNumb[0] !== "+") {
+             if ($("#telefonid4").val().length === 9) {
+                $("#telefonid4").removeClass("errorMsg");
+        }
+        else {
+                $("#telefonid4").addClass("errorMsg");
+         }
+      }
+
+      }
+
+   }
+
+
+        if (i === 3) {
+          document.getElementById("telefonid4").oninput = function () {
+
+            let telephoneNumb = [];
+            telephoneNumb = $("#telefonid4").val();
+
+            if (telephoneNumb[0] === "+") {
+              if ($("#telefonid4").val().length === 13) {
+                $("#telefonid4").removeClass("errorMsg");
+              }
+              else {
+                $("#telefonid4").addClass("errorMsg");
+              }
+            }
+
+            if (telephoneNumb[0] !== "+") {
+              if ($("#telefonid4").val().length === 9) {
+                $("#telefonid4").removeClass("errorMsg");
+              }
+              else {
+                $("#telefonid4").addClass("errorMsg");
+              }
+            }
+
+          }
+
+        }
+
+      }
+      // adding error messages to google places api inputs
+      var searchInputs = document.getElementsByClassName("search_city");
+      for (let i = 1; i <= searchInputs.length; i++) {
+        if (i === 1) {
+          let fullname1 = document.getElementById("fullname1").value;
+          let fullname1Copy = document.getElementById("fullname1Copy").value;
+          let lat1 = document.getElementById("lat1").value;
+          if (fullname1 !== fullname1Copy || (fullname1 === fullname1Copy && lat1 === "")) {
+            $("#fullname1").addClass("errorMsg");
+          }
+          else {
+            $("#fullname1").removeClass("errorMsg");
+          }
+        }
+        if (i === 2) {
+          let fullname2 = document.getElementById("fullname2").value;
+          let fullname2Copy = document.getElementById("fullname2Copy").value;
+          let lat2 = document.getElementById("lat2").value;
+          if (fullname2 !== fullname2Copy || (fullname2 === fullname2Copy && lat2 === "")) {
+            $("#fullname2").addClass("errorMsg");
+          }
+          else {
+            $("#fullname2").removeClass("errorMsg");
+          }
+        }
+        if (i === 3 && $("#fullname3").length===1) {
+          let fullname3 = document.getElementById("fullname3").value;
+          let fullname3Copy = document.getElementById("fullname3Copy").value;
+          let lat3 = document.getElementById("lat3").value;
+          if (fullname3 !== fullname3Copy || (fullname3 === fullname3Copy && lat3 === "")) {
+            $("#fullname3").addClass("errorMsg");
+          }
+          else {
+            $("#fullname3").removeClass("errorMsg");
+          }
+        }
+        if (i === 3 && $("#fullname4").length===1) {
+          let fullname4 = document.getElementById("fullname4").value;
+          let fullname4Copy = document.getElementById("fullname4Copy").value;
+          let lat4 = document.getElementById("lat4").value;
+          if (fullname4 !== fullname4Copy || (fullname4 === fullname4Copy && lat4 === "")) {
+            $("#fullname4").addClass("errorMsg");
+          }
+          else {
+            $("#fullname4").removeClass("errorMsg");
+          }
+        }
+        if (i === 4) {
+          let fullname4 = document.getElementById("fullname4").value;
+          let fullname4Copy = document.getElementById("fullname4Copy").value;
+          let lat4 = document.getElementById("lat4").value;
+          if (fullname4 !== fullname4Copy || (fullname4 === fullname4Copy && lat4 === "")) {
+            $("#fullname4").addClass("errorMsg");
+          }
+          else {
+            $("#fullname4").removeClass("errorMsg");
+          }
+        }
+      }
+
+
+      // at the end of page. Object input error message part
+
+      if ($("#chtoVzyat").val().length < 2) {
+        $("#chtoVzyat").addClass("errorMsg");
+      }
+
+      document.getElementById("chtoVzyat").oninput = function () {
+
+        let object = $("#chtoVzyat").val();
+        if (object.length < 2) {
+          $("#chtoVzyat").addClass("errorMsg");
+        }
+        else {
+          $("#chtoVzyat").removeClass("errorMsg");
+        }
+
+      }
+      //  showing user which part error inputted
+      if ($(".errorMsg").length !== 0) {
+        $([document.documentElement, document.body]).animate({
+          scrollTop: $(".errorMsg:first").offset().top
+        }, 3000);
+      }
+      //  create order part
+      if( $(".errorMsg").length === 0 ){
+        createOrder();
+      }
+    
+  }
+  </script>
+  </div>
+  <footer>
+    <div class="footer">
+      <ul class="social_networks">
+        <li><i class="social_icons fab fa-facebook"></i></li>
+        <li><i class="social_icons fab fa-twitter"></i></li>
+        <li><i class="social_icons fab fa-youtube"></i></li>
+        <li><i class="social_icons fab fa-instagram"></i></li>
+        <li><i class="social_icons fab fa-pinterest"></i></li>
+      </ul>
+
+
+      <span style="text-align: center; ">
+        <h5 class="my-0 font-weight-normal "><a href="#" class="nav-link font-weight-bold p-0"
+            style="color:white;font-size: 26px;"> <a style="color: white; font-weight: bold;"
+              href="https://emu.uz/">emu.uz</a></h5>
+        <small class="d-block mb-3  pt-2" style="font-size: 16px;color: #fbfbfb;">&copy; 2017-2021</small>
+      </span>
+
+    </div>
+  </footer>
+  <!-- getting clicked method of delivery -->
+  <script>
+    let method = document.getElementById("clickedBtnName");
+    if (method.value == "peshkom") {
+      sendDataPeshkom();
+    }
+    else if (method.value == "avtomobil") {
+      sendDataLegavto();
+    }
+    else if (method.value == "gruzovoy") {
+      sendDataGruzavoy();
+    }
+ 
+//  Calculate delivery cost on the fly (for not yet created order)
+   function calculateDelivaeryOntheFly(){
+           
+    let tokenDelivery = JSON.parse(window.localStorage.getItem('token'));
+
+    let phoneClassnamesObCopy = document.getElementsByClassName("telefonClass");
+  // console.log(phoneClassnamesObCopy.length)
+   if (phoneClassnamesObCopy.length === 2 && weight!==undefined && $("#lng1").val()!=="" && $("#lng2").val()!=="") {
+      let long1 = document.getElementById("lng1").value;
+      let lat1  =  document.getElementById("lat1").value;
+      let long2 = document.getElementById("lng2").value;
+      let lat2  =  document.getElementById("lat2").value;
+      let datePicker1 = $(".datePickerClass1 :selected").val();
+      let datePicker2 = $(".datePickerClass2 :selected").val();
+      let date_from1 = $(".timePickerFromClass1 :selected").val();
+      let date_to1 =  $(".timePickerToClass1 :selected").val();
+      let date_from2 = $(".timePickerFromClass2 :selected").val();
+      let date_to2 = $(".timePickerToClass2 :selected").val();
+    long1 = JSON.parse(long1);
+    lat1 = JSON.parse(lat1);
+    long2 = JSON.parse(long2);
+    lat2 = JSON.parse(lat2);
+    weight = JSON.parse(weight);
+    let date_from1Checker = parseInt(date_from1.substring(0,2));
+    let date_to1Checker =  parseInt(date_to1.substring(0,2));
+    let date_from2Checker = parseInt(date_from2.substring(0,2));
+    let date_to2Checker = parseInt(date_to2.substring(0,2));
+    if(date_from1Checker > date_to1Checker){
+       date_to1= date_from1;
+    }
+    if(date_from2Checker > date_to2Checker){
+       date_to2= date_from2;
+    }
+    // console.log(datePicker1 + " " + date_from1 + " " + date_to1);
+    // console.log(datePicker2 + " " + date_from2 + " " + date_to2);
+    // console.log(long1, lat1, long2, lat2, delivery_method, weight);
+    axios({
+      method: "post",
+      headers: { 'Authorization': ' Bearer ' + tokenDelivery },
+      url: 'http://95.217.183.114/order-api/order/delivery-cost',
+      data: {
+        "delivery_method": delivery_method,
+        "weight": weight,
+        "transport_type": transport_type,
+        "addresses": [
+          {
+            "coordinate": {
+              "longitude": long1,
+              "latitude": lat1
+            },
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker1 + " " + date_from1,
+              "date_to": datePicker1 + " " + date_to1
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long2,
+              "latitude": lat2
+            },
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker2 + " " + date_from2,
+              "date_to": datePicker2 + " " + date_to2
+            }
+          }
+        ]
+
+      }
+    })
+      .then(function (response) {
+        document.getElementById("price").innerHTML = response.data.data;
+        $('#price').formatCurrency();
+      })
+      .catch(function (error) {
+ 
+      });
+   }
+   //  adding auto calculate delivery cost to third form
+   if (phoneClassnamesObCopy.length === 3 && $("#lng3").length === 1 && $("#lng1").val()!=="" && $("#lng2").val()!=="" && $("#lng3").val()!=="") {
+      let long1 = document.getElementById("lng1").value;
+      let lat1  =  document.getElementById("lat1").value;
+      let long2 = document.getElementById("lng2").value;
+      let lat2  =  document.getElementById("lat2").value;
+      let long3 = document.getElementById("lng3").value;
+      let lat3 = document.getElementById("lat3").value;
+      let datePicker1 = $(".datePickerClass1 :selected").val();
+      let datePicker2 = $(".datePickerClass2 :selected").val();
+      let datePicker3 = $(".datePickerClass3 :selected").val();
+    let date_from1 = $(".timePickerFromClass1 :selected").val();
+    let date_to1 =  $(".timePickerToClass1 :selected").val();
+    let date_from2 = $(".timePickerFromClass2 :selected").val();
+    let date_to2 = $(".timePickerToClass2 :selected").val();
+    let date_from3 = $(".timePickerFromClass3 :selected").val();
+    let date_to3 = $(".timePickerToClass3 :selected").val();
+    long1 = JSON.parse(long1);
+    lat1 = JSON.parse(lat1);
+    long2 = JSON.parse(long2);
+    lat2 = JSON.parse(lat2);
+    long3 = JSON.parse(long3);
+    lat3 = JSON.parse(lat3);
+    weight = JSON.parse(weight);
+    let date_from1Checker = parseInt(date_from1.substring(0,2));
+    let date_to1Checker =  parseInt(date_to1.substring(0,2));
+    let date_from2Checker = parseInt(date_from2.substring(0,2));
+    let date_to2Checker = parseInt(date_to2.substring(0,2));
+    let date_from3Checker = parseInt(date_from3.substring(0,2));
+    let date_to3Checker = parseInt(date_to3.substring(0,2)); 
+    if(date_from1Checker > date_to1Checker){
+       date_to1= date_from1;
+    }
+    if(date_from2Checker > date_to2Checker){
+       date_to2= date_from2;
+    }
+    if(date_from3Checker > date_to3Checker){
+       date_to3= date_from3;
+    }
+    // console.log(datePicker1 + " " + date_from1+ " " + date_to1);
+    // console.log(datePicker2 + " " + date_from2+ " " + date_to2);
+    // console.log(datePicker3 + " " + date_from3 + " " + date_to3);
+    // console.log(long1, lat1, long2, lat2, delivery_method, weight);
+    axios({
+      method: "post",
+      headers: { 'Authorization': ' Bearer ' + tokenDelivery },
+      url: 'http://95.217.183.114/order-api/order/delivery-cost',
+      data: {
+        "delivery_method": delivery_method,
+        "weight": weight,
+        "transport_type": transport_type,
+        "addresses": [
+          {
+            "coordinate": {
+              "longitude": long1,
+              "latitude": lat1
+            },
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker1 + " " + date_from1,
+              "date_to": datePicker1 + " " + date_to1
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long2,
+              "latitude": lat2
+            },
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker2 + " " + date_from2,
+              "date_to": datePicker2 + " " + date_to2
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long3,
+              "latitude": lat3
+            },
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker3 + " " + date_from3,
+              "date_to": datePicker3 + " " + date_to3
+            }
+          }
+
+        ]
+
+      }
+    })
+      .then(function (response) {
+        document.getElementById("price").innerHTML = response.data.data;
+        $('#price').formatCurrency();
+      })
+      .catch(function (error) {
+ 
+      });
+   }
+  //  adding auto calculate delivery cost to three form. It will be triggered when third form deleted 
+
+  if (phoneClassnamesObCopy.length === 3 && $("#lng4").length===1 && $("#lng1").val()!=="" && $("#lng2").val()!=="" && $("#lng4").val()!=="") {
+      let long1 = document.getElementById("lng1").value;
+      let lat1  =  document.getElementById("lat1").value;
+      let long2 = document.getElementById("lng2").value;
+      let lat2  =  document.getElementById("lat2").value;
+      let long4 = document.getElementById("lng4").value;
+      let lat4 = document.getElementById("lat4").value;
+      let datePicker1 = $(".datePickerClass1 :selected").val();
+      let datePicker2 = $(".datePickerClass2 :selected").val();
+      let datePicker4 = $(".datePickerClass4 :selected").val();
+    let date_from1 = $(".timePickerFromClass1 :selected").val();
+    let date_to1 =  $(".timePickerToClass1 :selected").val();
+    let date_from2 = $(".timePickerFromClass2 :selected").val();
+    let date_to2 = $(".timePickerToClass2 :selected").val();
+    let date_from4 = $(".timePickerFromClass4 :selected").val();
+    let date_to4 = $(".timePickerToClass4 :selected").val();
+    long1 = JSON.parse(long1);
+    lat1 = JSON.parse(lat1);
+    long2 = JSON.parse(long2);
+    lat2 = JSON.parse(lat2);
+    long4 = JSON.parse(long4);
+    lat4 = JSON.parse(lat4);
+    weight = JSON.parse(weight);
+    let date_from1Checker = parseInt(date_from1.substring(0,2));
+    let date_to1Checker =  parseInt(date_to1.substring(0,2));
+    let date_from2Checker = parseInt(date_from2.substring(0,2));
+    let date_to2Checker = parseInt(date_to2.substring(0,2));
+    let date_from4Checker = parseInt(date_from4.substring(0,2));
+    let date_to4Checker = parseInt(date_to4.substring(0,2)); 
+    if(date_from1Checker > date_to1Checker){
+       date_to1= date_from1;
+    }
+    if(date_from2Checker > date_to2Checker){
+       date_to2= date_from2;
+    }
+    if(date_from4Checker > date_to4Checker){
+       date_to4 = date_from4;
+    }
+    // console.log(datePicker1 + " " + date_from1+ " " + date_to1);
+    // console.log(datePicker2 + " " + date_from2+ " " + date_to2);
+    // console.log(datePicker4 + " " + date_from4 + " " + date_to4);
+    // console.log(long1, lat1, long2, lat2, delivery_method, weight);
+    axios({
+      method: "post",
+      headers: { 'Authorization': ' Bearer ' + tokenDelivery },
+      url: 'http://95.217.183.114/order-api/order/delivery-cost',
+      data: {
+        "delivery_method": delivery_method,
+        "weight": weight,
+        "transport_type": transport_type,
+        "addresses": [
+          {
+            "coordinate": {
+              "longitude": long1,
+              "latitude": lat1
+            },
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker1 + " " + date_from1,
+              "date_to": datePicker1 + " " + date_to1
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long2,
+              "latitude": lat2
+            },
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker2 + " " + date_from2,
+              "date_to": datePicker2 + " " + date_to2
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long4,
+              "latitude": lat4
+            },
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker4 + " " + date_from4,
+              "date_to": datePicker4 + " " + date_to4
+            }
+          }
+
+        ]
+
+      }
+    })
+      .then(function (response) {
+        document.getElementById("price").innerHTML = response.data.data;
+        $('#price').formatCurrency();
+      })
+      .catch(function (error) {
+ 
+      });
+   }
+ 
+  //  adding auto calculate delivery cost to fourth form
+  if (phoneClassnamesObCopy.length === 4 && $("#lng1").val()!=="" && $("#lng2").val()!=="" && $("#lng3").val()!=="" && $("#lng4").val()!=="") {
+      let long1 = document.getElementById("lng1").value;
+      let lat1  =  document.getElementById("lat1").value;
+      let long2 = document.getElementById("lng2").value;
+      let lat2  =  document.getElementById("lat2").value;
+      let long3 = document.getElementById("lng3").value;
+      let lat3 = document.getElementById("lat3").value;
+      let long4 = document.getElementById("lng4").value;
+      let lat4 = document.getElementById("lat4").value;
+      let datePicker1 = $(".datePickerClass1 :selected").val();
+      let datePicker2 = $(".datePickerClass2 :selected").val();
+      let datePicker3 = $(".datePickerClass3 :selected").val();
+      let datePicker4 = $(".datePickerClass4 :selected").val();
+    let date_from1 = $(".timePickerFromClass1 :selected").val();
+    let date_to1 =  $(".timePickerToClass1 :selected").val();
+    let date_from2 = $(".timePickerFromClass2 :selected").val();
+    let date_to2 = $(".timePickerToClass2 :selected").val();
+    let date_from3 = $(".timePickerFromClass3 :selected").val();
+    let date_to3 = $(".timePickerToClass3 :selected").val();
+    let date_from4 = $(".timePickerFromClass4 :selected").val();
+    let date_to4 = $(".timePickerToClass4 :selected").val();
+    long1 = JSON.parse(long1);
+    lat1  =  JSON.parse(lat1);
+    long2 = JSON.parse(long2);
+    lat2  =  JSON.parse(lat2);
+    long3 = JSON.parse(long3);
+    lat3  =  JSON.parse(lat3);
+    lat4 = JSON.parse(lat4);
+    long4 = JSON.parse(long4);
+    weight = JSON.parse(weight);
+    let date_from1Checker = parseInt(date_from1.substring(0,2));
+    let date_to1Checker =  parseInt(date_to1.substring(0,2));
+    let date_from2Checker = parseInt(date_from2.substring(0,2));
+    let date_to2Checker = parseInt(date_to2.substring(0,2));
+    let date_from3Checker = parseInt(date_from3.substring(0,2));
+    let date_to3Checker = parseInt(date_to3.substring(0,2));
+    let date_from4Checker = parseInt(date_from4.substring(0,2));
+    let date_to4Checker = parseInt(date_to4.substring(0,2));
+     
+    if(date_from1Checker > date_to1Checker){
+       date_to1 = date_from1;
+    }
+    if(date_from2Checker > date_to2Checker){
+       date_to2 = date_from2;
+    }
+    if(date_from3Checker > date_to3Checker){
+       date_to3 = date_from3;
+    }
+    if(date_from4Checker > date_to4Checker){
+       date_to4 = date_from4;
+    }
+    // console.log(datePicker1 + " " + date_from1+ " " + date_to1);
+    // console.log(datePicker2 + " " + date_from2+ " " + date_to2);
+    // console.log(datePicker3 + " " + date_from3 + " " + date_to3);
+    // console.log(datePicker4 + " " + date_from4 + " "+ date_to4);
+    // console.log(long1, lat1, long2, lat2, delivery_method, weight);
+    axios({
+      method: "post",
+      headers: { 'Authorization': ' Bearer ' + tokenDelivery },
+      url: 'http://95.217.183.114/order-api/order/delivery-cost',
+      data: {
+        "delivery_method": delivery_method,
+        "weight": weight,
+        "transport_type": transport_type,
+        "addresses": [
+          {
+            "coordinate": {
+              "longitude": long1,
+              "latitude": lat1
+            },
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker1 + " " + date_from1,
+              "date_to": datePicker1 + " " + date_to1
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long2,
+              "latitude": lat2
+            },
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker2 + " " + date_from2,
+              "date_to": datePicker2 + " " + date_to2
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long3,
+              "latitude": lat3
+            },
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker3 + " " + date_from3,
+              "date_to": datePicker3 + " " + date_to3
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long4,
+              "latitude": lat4
+            },
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker4 + " " + date_from4,
+              "date_to": datePicker4 + " " + date_to4
+            }
+          }
+
+        ]
+
+      }
+    })
+      .then(function (response) {
+        document.getElementById("price").innerHTML = response.data.data;
+        $('#price').formatCurrency();
+      })
+      .catch(function (error) {
+  
+      });
+   }
+ 
+  
+ }
+ 
+ calculateDelivaeryOntheFly();
+
+// updating weight 
+
+ document.getElementById("focusme").oninput = function () {
+         weight = document.getElementById("focusme").value;
+         if(weight!==""){
+         calculateDelivaeryOntheFly();
+         }
+ }
+
+
+//  create order part last api call
+ 
+function createOrder(){
+    
+    let tokenDelivery = JSON.parse(window.localStorage.getItem('token'));
+
+    let phoneClassnamesObCopy = document.getElementsByClassName("telefonClass");
+
+   if (phoneClassnamesObCopy.length === 2 && weight!==undefined && $("#lng1").val()!=="" && $("#lng2").val()!=="") {
+      let long1 = document.getElementById("lng1").value;
+      let lat1  =  document.getElementById("lat1").value;
+      let long2 = document.getElementById("lng2").value;
+      let lat2  =  document.getElementById("lat2").value;
+      let datePicker1 = $(".datePickerClass1 :selected").val();
+      let datePicker2 = $(".datePickerClass2 :selected").val();
+      let date_from1 = $(".timePickerFromClass1 :selected").val();
+      let date_to1 =  $(".timePickerToClass1 :selected").val();
+      let date_from2 = $(".timePickerFromClass2 :selected").val();
+      let date_to2 = $(".timePickerToClass2 :selected").val();
+    long1 = JSON.parse(long1);
+    lat1 = JSON.parse(lat1);
+    long2 = JSON.parse(long2);
+    lat2 = JSON.parse(lat2);
+    weight = JSON.parse(weight);
+    let date_from1Checker = parseInt(date_from1.substring(0,2));
+    let date_to1Checker =  parseInt(date_to1.substring(0,2));
+    let date_from2Checker = parseInt(date_from2.substring(0,2));
+    let date_to2Checker = parseInt(date_to2.substring(0,2));
+    if(date_from1Checker > date_to1Checker){
+       date_to1= date_from1;
+    }
+    if(date_from2Checker > date_to2Checker){
+       date_to2= date_from2;
+    }
+    // console.log(datePicker1 + " " + date_from1 + " " + date_to1);
+    // console.log(datePicker2 + " " + date_from2 + " " + date_to2);
+    // console.log(long1, lat1, long2, lat2, delivery_method, weight);
+    let object = $("#chtoVzyat").val();
+    let note1 = $(".otkuda1").val();
+    let adress1 = $("#name1").val();
+    let adress2 = $("#name2").val();
+    let note2 = $(".otkuda2").val();
+
+    let contact_phone1 = $("#telefonid1").val();
+    let contact_phone2 = $("#telefonid2").val();
+     // formatting phone number for first form 
+      if (contact_phone1[0] === '+') {
+        let cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += contact_phone1[i];
+        }
+        contact_phone1= cuttedPV;
+      }
+      else {
+        contact_phone1 = contact_phone1;
+      }
+     // formatting phone number for second form 
+      if (contact_phone2[0] === '+') {
+        let cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += contact_phone2[i];
+        }
+        contact_phone2= cuttedPV;
+      }
+      else {
+        contact_phone2 = contact_phone2;
+      }
+
+
+    // contact_phone1 = JSON.parse(contact_phone1);
+    // contact_phone2 = JSON.parse(contact_phone2);
+    axios({
+      method: "post",
+      headers: { 'Authorization': ' Bearer ' + tokenDelivery },
+      url: 'http://95.217.183.114/order-api/order/create',
+      data: {
+        "delivery_method": delivery_method,
+        "transport_type": transport_type,
+        "weight": weight,
+        "object": object,
+        "note" : note1,
+        "addresses": [
+          {
+            "coordinate": {
+              "longitude": long1,
+              "latitude": lat1
+            },
+            "address": adress1,
+            "contact_phone": contact_phone1,
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker1 + " " + date_from1,
+              "date_to": datePicker1 + " " + date_to1
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long2,
+              "latitude": lat2
+            },
+            "address": adress2,
+            "contact_phone": contact_phone2,
+            "note": note2,
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker2 + " " + date_from2,
+              "date_to":   datePicker2 + " " + date_to2
+            }
+          }
+        ]
+      }
+    })
+      .then(function (response) {
+      if(response.data.code==0){
+       alert("Ваш заказ успешно создан");
+       window.location.replace("/"); 
+      }
+      
+      })
+      .catch(function (error) {
+        if (error.response.data.code === 55000) {
+              alert("Неизвестная ошибка, попробуйте еще раз");
+            }
+            else if (error.response.data.code === 55001) {
+              alert("Ошибка проверки, попробуйте еще раз");
+            }
+            else if (error.response.data.code === 60001) {
+              alert("Заказ уже существует");
+            }
+      });
+   }
+   //  adding auto calculate delivery cost to third form
+   if (phoneClassnamesObCopy.length === 3 && weight!==undefined && $("#lng3").length === 1 && $("#lng1").val()!=="" && $("#lng2").val()!=="" && $("#lng3").val()!=="") {
+      let long1 = document.getElementById("lng1").value;
+      let lat1  =  document.getElementById("lat1").value;
+      let long2 = document.getElementById("lng2").value;
+      let lat2  =  document.getElementById("lat2").value;
+      let long3 = document.getElementById("lng3").value;
+      let lat3 = document.getElementById("lat3").value;
+      let datePicker1 = $(".datePickerClass1 :selected").val();
+      let datePicker2 = $(".datePickerClass2 :selected").val();
+      let datePicker3 = $(".datePickerClass3 :selected").val();
+    let date_from1 = $(".timePickerFromClass1 :selected").val();
+    let date_to1 =  $(".timePickerToClass1 :selected").val();
+    let date_from2 = $(".timePickerFromClass2 :selected").val();
+    let date_to2 = $(".timePickerToClass2 :selected").val();
+    let date_from3 = $(".timePickerFromClass3 :selected").val();
+    let date_to3 = $(".timePickerToClass3 :selected").val();
+    long1 = JSON.parse(long1);
+    lat1 = JSON.parse(lat1);
+    long2 = JSON.parse(long2);
+    lat2 = JSON.parse(lat2);
+    long3 = JSON.parse(long3);
+    lat3 = JSON.parse(lat3);
+    weight = JSON.parse(weight);
+    let date_from1Checker = parseInt(date_from1.substring(0,2));
+    let date_to1Checker =  parseInt(date_to1.substring(0,2));
+    let date_from2Checker = parseInt(date_from2.substring(0,2));
+    let date_to2Checker = parseInt(date_to2.substring(0,2));
+    let date_from3Checker = parseInt(date_from3.substring(0,2));
+    let date_to3Checker = parseInt(date_to3.substring(0,2)); 
+    if(date_from1Checker > date_to1Checker){
+       date_to1= date_from1;
+    }
+    if(date_from2Checker > date_to2Checker){
+       date_to2= date_from2;
+    }
+    if(date_from3Checker > date_to3Checker){
+       date_to3= date_from3;
+    }
+    // console.log(datePicker1 + " " + date_from1+ " " + date_to1);
+    // console.log(datePicker2 + " " + date_from2+ " " + date_to2);
+    // console.log(datePicker3 + " " + date_from3 + " " + date_to3);
+    // console.log(long1, lat1, long2, lat2, delivery_method, weight);
+    let object = $("#chtoVzyat").val();
+    let note1 = $(".otkuda1").val();
+    let adress1 = $("#name1").val();
+    let adress2 = $("#name2").val();
+    let adress3 = $("#name3").val();
+    let note2 = $(".otkuda2").val();
+    let note3 = $(".otkuda3").val();
+
+    let contact_phone1 = $("#telefonid1").val();
+    let contact_phone2 = $("#telefonid2").val();
+    let contact_phone3 = $("#telefonid3").val();
+     // formatting phone number for first form 
+      if (contact_phone1[0] === '+') {
+        let cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += contact_phone1[i];
+        }
+        contact_phone1= cuttedPV;
+      }
+      else {
+        contact_phone1 = contact_phone1;
+      }
+     // formatting phone number for second form 
+      if (contact_phone2[0] === '+') {
+        let cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += contact_phone2[i];
+        }
+        contact_phone2= cuttedPV;
+      }
+      else {
+        contact_phone2 = contact_phone2;
+      }
+
+     // formatting phone number for third form 
+     if (contact_phone3[0] === '+') {
+        let cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += contact_phone3[i];
+        }
+        contact_phone3= cuttedPV;
+      }
+      else {
+        contact_phone3 = contact_phone3;
+      }
+
+      axios({
+      method: "post",
+      headers: { 'Authorization': ' Bearer ' + tokenDelivery },
+      url: 'http://95.217.183.114/order-api/order/create',
+      data: {
+        "delivery_method": delivery_method,
+        "transport_type": transport_type,
+        "weight": weight,
+        "object": object,
+        "note" : note1,
+        "addresses": [
+          {
+            "coordinate": {
+              "longitude": long1,
+              "latitude": lat1
+            },
+            "address": adress1,
+            "contact_phone": contact_phone1,
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker1 + " " + date_from1,
+              "date_to": datePicker1 + " " + date_to1
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long2,
+              "latitude": lat2
+            },
+            "address": adress2,
+            "contact_phone": contact_phone2,
+            "note": note2,
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker2 + " " + date_from2,
+              "date_to":   datePicker2 + " " + date_to2
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long3,
+              "latitude": lat3
+            },
+            "address": adress3,
+            "contact_phone": contact_phone3,
+            "note": note3,
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker3 + " " + date_from3,
+              "date_to":   datePicker3 + " " + date_to3
+            }
+          }
+        ]
+      }
+    })
+      .then(function (response) {
+      if(response.data.code==0){
+        alert("Ваш заказ успешно создан");
+        window.location.replace("/");  
+      }
+      
+      })
+      .catch(function (error) {
+        if (error.response.data.code === 55000) {
+              alert("Неизвестная ошибка, попробуйте еще раз");
+            }
+            else if (error.response.data.code === 55001) {
+              alert("Ошибка проверки, попробуйте еще раз");
+            }
+            else if (error.response.data.code === 60001) {
+              alert("Заказ уже существует");
+            }
+      });
+   }
+  //  adding create order api to three forms. It will be triggered when third form deleted 
+
+  if (phoneClassnamesObCopy.length === 3 && $("#lng4").length===1 && $("#lng1").val()!=="" && $("#lng2").val()!=="" && $("#lng4").val()!=="") {
+      let long1 = document.getElementById("lng1").value;
+      let lat1  =  document.getElementById("lat1").value;
+      let long2 = document.getElementById("lng2").value;
+      let lat2  =  document.getElementById("lat2").value;
+      let long4 = document.getElementById("lng4").value;
+      let lat4 = document.getElementById("lat4").value;
+      let datePicker1 = $(".datePickerClass1 :selected").val();
+      let datePicker2 = $(".datePickerClass2 :selected").val();
+      let datePicker4 = $(".datePickerClass4 :selected").val();
+    let date_from1 = $(".timePickerFromClass1 :selected").val();
+    let date_to1 =  $(".timePickerToClass1 :selected").val();
+    let date_from2 = $(".timePickerFromClass2 :selected").val();
+    let date_to2 = $(".timePickerToClass2 :selected").val();
+    let date_from4 = $(".timePickerFromClass4 :selected").val();
+    let date_to4 = $(".timePickerToClass4 :selected").val();
+    long1 = JSON.parse(long1);
+    lat1 = JSON.parse(lat1);
+    long2 = JSON.parse(long2);
+    lat2 = JSON.parse(lat2);
+    long4 = JSON.parse(long4);
+    lat4 = JSON.parse(lat4);
+    weight = JSON.parse(weight);
+    let date_from1Checker = parseInt(date_from1.substring(0,2));
+    let date_to1Checker =  parseInt(date_to1.substring(0,2));
+    let date_from2Checker = parseInt(date_from2.substring(0,2));
+    let date_to2Checker = parseInt(date_to2.substring(0,2));
+    let date_from4Checker = parseInt(date_from4.substring(0,2));
+    let date_to4Checker = parseInt(date_to4.substring(0,2)); 
+    if(date_from1Checker > date_to1Checker){
+       date_to1= date_from1;
+    }
+    if(date_from2Checker > date_to2Checker){
+       date_to2= date_from2;
+    }
+    if(date_from4Checker > date_to4Checker){
+       date_to4 = date_from4;
+    }
+    // console.log(datePicker1 + " " + date_from1+ " " + date_to1);
+    // console.log(datePicker2 + " " + date_from2+ " " + date_to2);
+    // console.log(datePicker4 + " " + date_from4 + " " + date_to4);
+    // console.log(long1, lat1, long2, lat2, delivery_method, weight);
+    let object = $("#chtoVzyat").val();
+    let note1 = $(".otkuda1").val();
+    let adress1 = $("#name1").val();
+    let adress2 = $("#name2").val();
+    let adress4 = $("#name4").val();
+    let note2 = $(".otkuda2").val();
+    let note4 = $(".otkuda4").val();
+
+    let contact_phone1 = $("#telefonid1").val();
+    let contact_phone2 = $("#telefonid2").val();
+    let contact_phone4 = $("#telefonid4").val();
+     // formatting phone number for first form 
+      if (contact_phone1[0] === '+') {
+        let cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += contact_phone1[i];
+        }
+        contact_phone1= cuttedPV;
+      }
+      else {
+        contact_phone1 = contact_phone1;
+      }
+     // formatting phone number for second form 
+      if (contact_phone2[0] === '+') {
+        let cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += contact_phone2[i];
+        }
+        contact_phone2= cuttedPV;
+      }
+      else {
+        contact_phone2 = contact_phone2;
+      }
+
+     // formatting phone number for fourth form 
+     if (contact_phone4[0] === '+') {
+        let cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += contact_phone4[i];
+        }
+        contact_phone4 = cuttedPV;
+      }
+      else {
+        contact_phone4 = contact_phone4;
+      }
+
+    axios({
+      method: "post",
+      headers: { 'Authorization': ' Bearer ' + tokenDelivery },
+      url: 'http://95.217.183.114/order-api/order/create',
+      data: {
+        "delivery_method": delivery_method,
+        "transport_type": transport_type,
+        "weight": weight,
+        "object": object,
+        "note": note1,
+        "addresses": [
+          {
+            "coordinate": {
+              "longitude": long1,
+              "latitude": lat1
+            },
+            "address": adress1,
+            "contact_phone": contact_phone1,
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker1 + " " + date_from1,
+              "date_to": datePicker1 + " " + date_to1
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long2,
+              "latitude": lat2
+            },
+            "address": adress2,
+            "contact_phone": contact_phone2,
+            "note": note2,
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker2 + " " + date_from2,
+              "date_to": datePicker2 + " " + date_to2
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long4,
+              "latitude": lat4
+            },
+            "address": adress4,
+            "contact_phone": contact_phone4,
+            "note": note4,
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker4 + " " + date_from4,
+              "date_to": datePicker4 + " " + date_to4
+            }
+          }
+
+        ]
+
+      }
+    })
+      .then(function (response) {
+        
+        if(response.data.code==0){
+          alert("Ваш заказ успешно создан");
+          window.location.replace("/"); 
+        } 
+
+      })
+      .catch(function (error) {
+
+            if (error.response.data.code === 55000) {
+              alert("Неизвестная ошибка, попробуйте еще раз");
+            }
+            else if (error.response.data.code === 55001) {
+              alert("Ошибка проверки, попробуйте еще раз");
+            }
+            else if (error.response.data.code === 60001) {
+              alert("Заказ уже существует");
+            }
+ 
+      });
+   }
+ 
+  //  adding create order api call to all  four forms
+  if (phoneClassnamesObCopy.length === 4 && $("#lng1").val()!=="" && $("#lng2").val()!=="" && $("#lng3").val()!=="" && $("#lng4").val()!=="") {
+      let long1 = document.getElementById("lng1").value;
+      let lat1  =  document.getElementById("lat1").value;
+      let long2 = document.getElementById("lng2").value;
+      let lat2  =  document.getElementById("lat2").value;
+      let long3 = document.getElementById("lng3").value;
+      let lat3 = document.getElementById("lat3").value;
+      let long4 = document.getElementById("lng4").value;
+      let lat4 = document.getElementById("lat4").value;
+      let datePicker1 = $(".datePickerClass1 :selected").val();
+      let datePicker2 = $(".datePickerClass2 :selected").val();
+      let datePicker3 = $(".datePickerClass3 :selected").val();
+      let datePicker4 = $(".datePickerClass4 :selected").val();
+    let date_from1 = $(".timePickerFromClass1 :selected").val();
+    let date_to1 =  $(".timePickerToClass1 :selected").val();
+    let date_from2 = $(".timePickerFromClass2 :selected").val();
+    let date_to2 = $(".timePickerToClass2 :selected").val();
+    let date_from3 = $(".timePickerFromClass3 :selected").val();
+    let date_to3 = $(".timePickerToClass3 :selected").val();
+    let date_from4 = $(".timePickerFromClass4 :selected").val();
+    let date_to4 = $(".timePickerToClass4 :selected").val();
+    long1 = JSON.parse(long1);
+    lat1  =  JSON.parse(lat1);
+    long2 = JSON.parse(long2);
+    lat2  =  JSON.parse(lat2);
+    long3 = JSON.parse(long3);
+    lat3  =  JSON.parse(lat3);
+    lat4 = JSON.parse(lat4);
+    long4 = JSON.parse(long4);
+    weight = JSON.parse(weight);
+    let date_from1Checker = parseInt(date_from1.substring(0,2));
+    let date_to1Checker =  parseInt(date_to1.substring(0,2));
+    let date_from2Checker = parseInt(date_from2.substring(0,2));
+    let date_to2Checker = parseInt(date_to2.substring(0,2));
+    let date_from3Checker = parseInt(date_from3.substring(0,2));
+    let date_to3Checker = parseInt(date_to3.substring(0,2));
+    let date_from4Checker = parseInt(date_from4.substring(0,2));
+    let date_to4Checker = parseInt(date_to4.substring(0,2));
+     
+    if(date_from1Checker > date_to1Checker){
+       date_to1 = date_from1;
+    }
+    if(date_from2Checker > date_to2Checker){
+       date_to2 = date_from2;
+    }
+    if(date_from3Checker > date_to3Checker){
+       date_to3 = date_from3;
+    }
+    if(date_from4Checker > date_to4Checker){
+       date_to4 = date_from4;
+    }
+    // console.log(datePicker1 + " " + date_from1+ " " + date_to1);
+    // console.log(datePicker2 + " " + date_from2+ " " + date_to2);
+    // console.log(datePicker3 + " " + date_from3 + " " + date_to3);
+    // console.log(datePicker4 + " " + date_from4 + " "+ date_to4);
+    // console.log(long1, lat1, long2, lat2, delivery_method, weight);
+    let object = $("#chtoVzyat").val();
+    let note1 = $(".otkuda1").val();
+    let adress1 = $("#name1").val();
+    let adress2 = $("#name2").val();
+    let adress3 = $("#name3").val();
+    let adress4 = $("#name4").val();
+    let note2 = $(".otkuda2").val();
+    let note3 = $(".otkuda3").val();
+    let note4 = $(".otkuda4").val();
+
+    let contact_phone1 = $("#telefonid1").val();
+    let contact_phone2 = $("#telefonid2").val();
+    let contact_phone3 = $("#telefonid3").val();
+    let contact_phone4 = $("#telefonid4").val();
+
+    // formatting phone number for first form 
+    if (contact_phone1[0] === '+') {
+        let cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += contact_phone1[i];
+        }
+        contact_phone1= cuttedPV;
+      }
+      else {
+        contact_phone1 = contact_phone1;
+      }
+     // formatting phone number for second form 
+      if (contact_phone2[0] === '+') {
+        let cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += contact_phone2[i];
+        }
+        contact_phone2= cuttedPV;
+      }
+      else {
+        contact_phone2 = contact_phone2;
+      }
+      // formatting phone number for third form
+      
+      if (contact_phone3[0] === '+') {
+        let cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += contact_phone3[i];
+        }
+        contact_phone3 = cuttedPV;
+      }
+      else {
+        contact_phone3 = contact_phone3;
+      }
+
+     // formatting phone number for fourth form 
+     if (contact_phone4[0] === '+') {
+        let cuttedPV = '';
+        for (let i = 4; i <= 12; i++) {
+          cuttedPV += contact_phone4[i];
+        }
+        contact_phone4 = cuttedPV;
+      }
+      else {
+        contact_phone4 = contact_phone4;
+      }
+
+
+    axios({
+      method: "post",
+      headers: { 'Authorization': ' Bearer ' + tokenDelivery },
+      url: 'http://95.217.183.114/order-api/order/create',
+      data: {
+        "delivery_method": delivery_method,
+        "transport_type": transport_type,
+        "weight": weight,
+        "object": object,
+        "note": note1,        
+        "addresses": [
+          {
+            "coordinate": {
+              "longitude": long1,
+              "latitude": lat1
+            },
+            "address": adress1,
+            "contact_phone": contact_phone1,
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker1 + " " + date_from1,
+              "date_to": datePicker1 + " " + date_to1
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long2,
+              "latitude": lat2
+            },
+            "address": adress2,
+            "contact_phone": contact_phone2,
+            "note": note2,
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker2 + " " + date_from2,
+              "date_to": datePicker2 + " " + date_to2
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long3,
+              "latitude": lat3
+            },
+            "address": adress3,
+            "contact_phone": contact_phone3,
+            "note": note3,
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker3 + " " + date_from3,
+              "date_to": datePicker3 + " " + date_to3
+            }
+          },
+          {
+            "coordinate": {
+              "longitude": long4,
+              "latitude": lat4
+            },
+            "address": adress4,
+            "contact_phone": contact_phone4,
+            "note": note4,
+            "delivery_time": {
+              "urgency": "exact-time",
+              "date_from": datePicker4 + " " + date_from4,
+              "date_to": datePicker4 + " " + date_to4
+            }
+          }
+
+        ]
+
+      }
+    })
+      .then(function (response) {
+        
+        if(response.data.code==0){
+          alert("Ваш заказ успешно создан");
+          window.location.replace("/"); 
+        } 
+
+      })
+      .catch(function (error) {
+      
+          if (error.response.data.code === 55000) {
+              alert("Неизвестная ошибка, попробуйте еще раз");
+            }
+            else if (error.response.data.code === 55001) {
+              alert("Ошибка проверки, попробуйте еще раз");
+            }
+            else if (error.response.data.code === 60001) {
+              alert("Заказ уже существует");
+            }
+  
+      });
+   }
+ 
+
+  // let tokenDelivery = JSON.parse(window.localStorage.getItem('token'));
+  //  axios({
+  //     method: "post",
+  //     headers: { 'Authorization': ' Bearer ' + tokenDelivery },
+  //     url: 'http://95.217.183.114/order-api/order/create',
+  //     data: {
+  //       "delivery_method": delivery_method,
+  //       "weight": weight,
+  //       "transport_type": transport_type,
+  //       "addresses": [
+  //         {
+  //           "coordinate": {
+  //             "longitude": long1,
+  //             "latitude": lat1
+  //           },
+  //           "delivery_time": {
+  //             "urgency": "exact-time",
+  //             "date_from": datePicker1 + " " + date_from1,
+  //             "date_to": datePicker1 + " " + date_to1
+  //           }
+  //         },
+  //         {
+  //           "coordinate": {
+  //             "longitude": long2,
+  //             "latitude": lat2
+  //           },
+  //           "delivery_time": {
+  //             "urgency": "exact-time",
+  //             "date_from": datePicker2 + " " + date_from2,
+  //             "date_to": datePicker2 + " " + date_to2
+  //           }
+  //         },
+  //         {
+  //           "coordinate": {
+  //             "longitude": long3,
+  //             "latitude": lat3
+  //           },
+  //           "delivery_time": {
+  //             "urgency": "exact-time",
+  //             "date_from": datePicker3 + " " + date_from3,
+  //             "date_to": datePicker3 + " " + date_to3
+  //           }
+  //         },
+  //         {
+  //           "coordinate": {
+  //             "longitude": long4,
+  //             "latitude": lat4
+  //           },
+  //           "delivery_time": {
+  //             "urgency": "exact-time",
+  //             "date_from": datePicker4 + " " + date_from4,
+  //             "date_to": datePicker4 + " " + date_to4
+  //           }
+  //         }
+
+  //       ]
+
+  //     }
+  //   })
+  //     .then(function (response) {
+  //        document.getElementById("price").innerHTML = "  " + response.data.data;
+  //     })
+  //     .catch(function (error) {
+          
+  //     });
+     
+
+
+ };
+
+  </script>
+
+</body>
+
+</html>
+
+
+<!--     <script>
+      let token = JSON.parse(window.localStorage.getItem('token'));
+      let showRegister = document.getElementById("vxod");
+      let showUserProfile = document.getElementById("userProfileR");
+      let showLogOut = document.getElementById("vihod");
+      if (token === null) {
+        showRegister.style.display = "inline";
+        showUserProfile.style.display = "none";
+        showLogOut.style.display = "none";
+      }
+      else {
+        showRegister.style.display = "none";
+        //  get user profile
+        axios({
+          method: "post",
+          headers: { 'Authorization': ' Bearer ' + token },
+          url: 'http://95.217.183.114/order-api/user/profile',
+        })
+          .then(function (response) {
+            // Get Current User Profile
+            let userName = response.data.data.name;
+            document.getElementById("userProfile").innerHTML = userName;
+            // setting userprofile appearance
+            showUserProfile.style.display = "inline";
+            // setting logout appearance
+            showLogOut.style.display = "inline";
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+      }
+      function logOut() {
+        window.localStorage.removeItem('token');
+        location.reload();
+      }
+    </script> -->

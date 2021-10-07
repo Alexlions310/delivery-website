@@ -1,0 +1,815 @@
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+/* giving border radius to all components */
+#w-1,#w-2,#w-3,#w-4,#peshkom,#legavto,#gruzovoy,#jip1,
+#kabluk2,#porter3,#gazel4,.textkilo,#cityId,.telefonClass,
+#datePicker,#timePickerFrom,#timePickerTo,#otkuda,#formdostavat>form,.chtoVzyatClass{
+  border-radius: 8px;
+}
+
+.container {
+  max-width: 1000px;
+}
+.container {
+  max-width: 1180px;
+}
+.pricing-header {
+  max-width: 700px;
+}
+
+.card-deck .card {
+  min-width: 220px;
+}
+.dropdown-toggle {
+  border-bottom: 1px dotted #333c4e;
+}
+.dropdown-toggle::after {
+  display: none;
+}
+.dropdown-toggle:hover {
+  text-decoration: none;
+}
+.dropdown-item:hover {
+  background-color: #edf6ff;
+}
+.dropdown-menu {
+  padding: 0;
+}
+.hover-class {
+  border-bottom: 1px dotted #333c4e;
+}
+.hover-class:hover {
+  color: red;
+  text-decoration: none;
+  border-bottom: 0 !important;
+}
+.btn-outline-primary:hover {
+  background-color: #f5246c;
+  border-color: #f5246c;
+}
+.btn-outline-primary {
+  border-color: #333c4e;
+  color: #333c4e;
+}
+.nav-tabs .nav-link {
+  border: 1px solid transparent;
+  background-color: #edf6ff;
+}
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  border: 1px solid #dee2e6;
+  background-color: #edf6ff;
+  border-radius: 4px;
+}
+.nav-tabs {
+  border: 0;
+}
+.nav-link {
+  color: #333c4e;
+}
+.card-title {
+  border: 1px solid #f5246c;
+  border-radius: 12px;
+  padding: 1px 8px;
+  width: 125px;
+  font-size: 12px;
+  color: #f5246c;
+  margin-bottom: 16px;
+}
+.card {
+  border-radius: 16px;
+  border: 0;
+  box-shadow: 0px 2px 18px rgba(0, 0, 0, 0.08);
+}
+.ecommerce-stuff__list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 75%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ecommerce-stuff__list-item {
+  position: relative;
+  width: 243px;
+}
+.pls-install-app {
+  background-image: linear-gradient(
+    102deg,
+    rgba(153, 207, 254, 0.09),
+    rgba(64, 166, 253, 0.11)
+  );
+  border-top: 2px solid #f2f6fc;
+}
+.pls-install-app__content {
+  font-weight: normal;
+  padding: 30px 30px;
+  margin: 0 auto;
+  color: #333c4e;
+  background-image: url(../IMG/dostavka.jpg);
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: contain;
+}
+.pls-install-app__header {
+  font-size: 32px;
+  line-height: 1.25;
+  max-width: 50%;
+  font-weight: normal;
+}
+.pls-install-app__description {
+  font-size: 16px;
+  max-width: 430px;
+  margin: 30px 0;
+}
+.pls-install-app__links {
+  display: flex;
+}
+.pls-install-app__qr-code {
+  margin-right: 24px;
+  padding: 10px 10px 5px 10px;
+  background: #ffffff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+.pls-install-app__qr-code img {
+  width: 182px;
+  height: 182px;
+}
+.pls-install-app__apps {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.pls-install-app__link:not(:last-child) {
+  margin-bottom: 10px;
+}
+.dv-small-card-list {
+  width: 100%;
+}
+.dv-small-card-list__items {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.dv-small-card-list__item {
+  display: flex;
+  width: 30%;
+  padding-top: 40px;
+  padding-right: 35px;
+}
+.dv-small-card-list__image {
+  width: 100px;
+  margin-right: 20px;
+  border-radius: 15px;
+  background-repeat: no-repeat;
+}
+.dv-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  background-color: #edf6ff;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-image: url(../IMG/rocket.svg);
+}
+.layout__section {
+  margin-top: 48px;
+}
+.layout__content-wrapper--columns {
+  display: flex;
+  justify-content: space-between;
+}
+.layout__column {
+  width: 100%;
+}
+.payment {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #333c4e;
+  margin-bottom: 40px;
+}
+.payment__header {
+  text-align: center;
+}
+.payment__title {
+  display: inline-block;
+  margin: 20px 0 5px;
+  font-size: 23px;
+  font-weight: bold;
+}
+.payment__subtitle {
+  display: block;
+  margin: 5px 0 30px;
+}
+.payment__list {
+  padding: 0;
+  columns: 2;
+}
+.payment__item {
+  list-style: none;
+  min-height: 38px;
+  white-space: nowrap;
+  padding-top: 30px;
+}
+.payment__name {
+  display: inline-block;
+  vertical-align: middle;
+}
+.delivery__title {
+  display: inline-block;
+  margin: 20px 0 5px;
+  font-size: 23px;
+  font-weight: bold;
+}
+.delivery {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #333c4e;
+  margin-bottom: 40px;
+}
+.delivery__header {
+  text-align: center;
+}
+.delivery__subtitle {
+  display: block;
+  margin: 5px 0 30px;
+}
+.delivery__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 33px auto 0;
+  padding: 0;
+  max-width: 400px;
+}
+.delivery__item {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  width: 33%;
+  list-style: none;
+}
+.delivery__link {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  color: #333c4e !important;
+  text-decoration: none;
+  background-color: #fff;
+  box-shadow: none;
+  border: solid 1px #fff;
+  min-height: 120px;
+  transition: all 0.125s ease-in;
+}
+.delivery__icon--foot:before {
+  content: url(../IMG/courier-icon.svg);
+  width: 39px;
+  height: 52px;
+}
+.delivery__link:hover {
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+}
+.payment__icon--ya-money:before {
+  content: url(../IMG/card-icon.svg);
+  height: 30px;
+}
+.payment__icon:before {
+  display: inline-block;
+  vertical-align: middle;
+  min-width: 33px;
+  margin-right: 10px;
+}
+.layout__section {
+  margin-top: 48px;
+}
+.layout__content-wrapper {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.layout__content-header--small {
+  margin: 0 auto;
+  max-width: 705px;
+}
+.layout__content-header {
+  text-align: center;
+  font-size: 32px;
+  line-height: 1.25;
+  padding-bottom: 10px;
+}
+.dv-index-info__text {
+  margin: 0 auto;
+  width: 705px;
+  padding-bottom: 32px;
+  font-size: 16px;
+  line-height: 1.75;
+}
+.dv-index-info__text--fullwidth {
+  width: 100%;
+}
+.about-text {
+  columns: 2;
+  column-gap: 76px;
+  line-height: 28px;
+  color: #333c4e;
+  overflow: hidden;
+  padding-left: 20px;
+}
+.dv-accordion__header {
+  color: #476bb3;
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* styling footer part */
+.footer {
+  background-color: #ff3e80;
+  width: 100%;
+  height: 250px;
+}
+
+.social_networks {
+  list-style-type: none;
+  text-align: center;
+  padding-left: 0px;
+}
+
+.social_networks li {
+  display: inline-block;
+  padding: 1%;
+  border-radius: 50%;
+  margin: 3%;
+  margin-top: 30px;
+  background-color: white;
+  color: #ff3e80;
+}
+
+.social_networks li:hover {
+  background-color: black;
+  cursor: pointer;
+}
+
+.social_icons {
+  font-size: 200%;
+}
+
+.footer_logo {
+  list-style-type: none;
+  text-align: center;
+}
+
+.footer_logo li {
+  display: inline-block;
+}
+
+.last_p {
+  text-align: center;
+  color: white;
+  font-size: 120%;
+}
+
+.last_link {
+  color: green;
+  text-decoration: none;
+}
+
+.last_link:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.last_logo {
+  margin-right: 4%;
+}
+
+.last_logo:hover {
+  cursor: pointer;
+}
+/* styling card part */
+@media only screen and (max-width: 800px) {
+  .card {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+/* styling createorder page */
+
+/* Вес посылки  */
+.textkilo {
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  background-color: white;
+}
+
+.textkilo:focus {
+  border: 2px solid #5c98ff;
+  outline: 2px solid #d5d4d4;
+}
+
+/* adding hover effect to all buttons */
+/* <!-- dostavit method --> */
+#dostavitMetod{
+  display: flex;
+}
+
+#peshkom {
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  margin-right: 10px;
+  background-color: white;
+}
+
+#legavto,
+#gruzovoy {
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: white;
+}
+
+/* Ves category */
+#w-1 {
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  margin-right: 10px;
+  background-color: white;
+}
+#w-2,
+#w-3,
+#w-4 {
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: white;
+}
+
+/* gruzovoy dostavat part */
+#gruzovoyDiv{
+  white-space: nowrap;
+  overflow: auto;
+}
+
+#jip1,
+#kabluk2,
+#porter3,
+#gazel4 {
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  margin-right: 10px;
+  background-color: white;
+  height: 60px;
+  width: 240px;
+}
+
+#jip1 > div > img,
+#kabluk2 > div > img,
+#porter3 > div > img,
+#gazel4 > div > img {
+  width: 50px;
+  height: 40px;
+  padding-right: 5px;
+  padding-top:7px;
+}
+
+#peshkom:hover {
+  color: red;
+}
+.gruzovoy:hover {
+  color: #f5246c;
+}
+.vesgruzovoyErrorMsg{
+  display: none;
+}
+
+/* form part */
+.cLeft{
+  display: inline;
+}
+.doRight{
+  display: inline;
+}
+#formdostavat {
+  width: 90%;
+  margin-right: 25%;
+}
+.telefonErr{
+  display: none;
+  position: absolute;
+  top:30px; 
+  left: 10%; 
+}
+#roundNumber {
+  display: inline;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgb(255, 62, 128);
+  text-align: center;
+  margin-left: 5%;
+}
+
+#otkuda {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 4%;
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  background-color: white;
+}
+
+
+#otkuda:focus {
+  border: 2px solid #5c98ff;
+  outline: 2px solid #d5d4d4;
+}
+
+.telefonClass{
+  width: 40%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  background-color: white;
+}
+.telefonClass:focus{
+  border: 2px solid #5c98ff;
+  outline: 2px solid #d5d4d4;
+}
+
+#datePicker{
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  background-color: white;
+}
+
+#datePicker:focus{
+  border: 2px solid #5c98ff;
+  outline: 2px solid #d5d4d4;
+}
+
+#timePickerFrom{
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  background-color: white;
+}
+
+#timePickerFrom:focus{
+  border: 2px solid #5c98ff;
+  outline: 2px solid #d5d4d4;
+}
+
+#timePickerTo{
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  background-color: white;
+}
+
+#timePickerTo:focus{
+  border: 2px solid #5c98ff;
+  outline: 2px solid #d5d4d4;
+}
+
+#cityId{
+  margin-left: 5%;
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  background-color: white;
+}
+
+#cityId:focus{
+  border: 2px solid #5c98ff;
+  outline: 2px solid #d5d4d4;
+}
+/* create order page styling date picker part */
+#floatedDatePickerDiv{
+  float: right; 
+  margin-right: 5%;
+}
+
+
+/* Adding style to container */
+@media screen and (min-width: 436px) {
+.cotainerAll{
+    padding-left: 42px;
+    padding-right: 42px;
+ }
+}
+@media screen and (max-width: 435px){
+  .cotainerAll{
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .removeMargin{
+    margin: 0px;
+  }
+ 
+}
+@media screen and (max-width:385px) and (min-width:345px){
+  .cotainerAll{
+    font-size: 14px;
+  }
+  .removePadding{
+    padding: 0px;
+  }
+}
+@media screen and (max-width:345px) {
+  .cotainerAll{
+    font-size: 10px;
+  }
+  .social_networks li{
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+}
+
+/* chto vzyat part */
+.chtoVzyatClass{
+  
+  width: 90%;
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  background-color: white;
+  margin-bottom: 2%;
+}
+.chtoVzyatClass:focus{
+  border: 2px solid #5c98ff;
+  outline: 2px solid #d5d4d4;
+}
+/* raschitat order price part */
+#raschitat{
+  padding-top: 20px;
+} 
+
+/* media queries */
+@media screen and (min-width: 1007px) {
+  #bodyMargin{
+    margin-left: 20%;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1006px){
+     #bodyMargin{
+       margin-left: 30px;
+     }
+     .telefonClass{
+       width: 35%;
+     }
+     .telefonErr{
+       left: 11%;
+     }
+     
+}
+@media screen and (max-width:767px){
+    #bodyMargin{
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    #formdostavat{
+      width: 100%;
+    }
+   
+    #dostavitMetod{
+      display: block;  
+     }
+    #peshkom{
+      width: 100%;
+      margin:0px;
+      margin-top:8px;
+    }
+    #legavto{
+      width:100%;
+      margin:0px;
+      margin-top:8px;
+    }
+    #gruzovoy{
+      width:100%;
+      margin:0px;
+      margin-top:8px;
+    }
+    .chtoVzyatClass{
+      width: 100%;
+    }
+    .social_networks li{
+         padding: 2%; 
+    }
+}
+@media  screen and (max-width:425px) {
+  #w-1{
+    padding: 3px;
+    margin-right: 0px;
+  }
+  #w-2,
+  #w-3,
+  #w-4 {
+     margin-right: 0px;
+     margin-left: 5px;
+  }
+
+}
+
+@media screen and (max-width: 10000px){
+  .telefonErr{
+    left: 5%;
+  }
+  .telefonClass{
+    width: 90%;
+    margin-bottom: 20px;
+  }
+   #floatedDatePickerDiv{
+    float: none;
+    margin-left: 5%;
+    margin-bottom: 15px;
+ }
+   #datePicker{
+         width: 100%;
+   }
+  .cLeft{
+    float:left;
+    margin-top: 10px;
+  }
+  #cId{
+    display: block;
+  }
+  #timePickerFrom{
+    width: 95px;
+    margin-bottom: 20px;
+  }
+  .doRight{
+    float: right;
+    margin-top:10px;
+  }
+  #doId{
+    display: block;
+  }
+  #timePickerTo{
+    width: 95px;
+    margin-bottom: 20px;
+  }
+}
+
+
+/* styling search adress button */
+.search_city{
+  border-radius: 8px;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid #d5d4d4;
+  padding: 8px;
+  background-color: white;
+}
+
+.search_city:focus{
+  border: 2px solid #5c98ff;
+  outline: 2px solid #d5d4d4;
+}
+
+/* create order part */
+/* adding error messages */
+.AdressErrindex{
+ color: red;
+ display: none;
+}
+
+.AdressErr{
+  color: red;
+  position: absolute;
+  left: 5%;
+  top: 38px;
+  display: none;
+}
+
+.errorMsg{
+  border: 1px solid red;
+}
+.errorMsg + small{
+     display: block;
+     color: red;  
+}
+
+
+
+
